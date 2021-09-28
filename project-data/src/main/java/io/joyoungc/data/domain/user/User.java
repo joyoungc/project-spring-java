@@ -14,7 +14,6 @@ import javax.persistence.Id;
  * Created by Aiden Jeong on 2021.09.22
  */
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User extends AuditEntity {

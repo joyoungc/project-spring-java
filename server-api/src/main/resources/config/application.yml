@@ -1,3 +1,21 @@
 server:
   port: 9010
   shutdown: graceful
+
+# 스프링 프레임워크 설정
+spring:
+  output:
+    ansi:
+      enabled: always
+  jpa:
+    open-in-view: false
+
+logging:
+  level:
+    jdbc:
+      sqlonly: info
+      sqltiming: off
+      audit: off
+      connection: off
+      resultsettable: info
+      resultset: off
