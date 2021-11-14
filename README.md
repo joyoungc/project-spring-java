@@ -3,10 +3,10 @@
 
 ## Modules
 
-### project-common
+### server-common
 프로젝트를 위한 공통 코드
 
-### project-data
+### server-data
 데이터 관련 공통 라이브러리 및 Entity, Repository
 
 ### parent-spring-boot

@@ -10,8 +10,8 @@
 
     <modules>
         <module>parent-spring-boot</module>
-        <module>project-common</module>
-        <module>project-data</module>
+        <module>server-common</module>
+        <module>server-data</module>
         <module>server-api</module>
     </modules>
 
