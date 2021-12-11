@@ -9,6 +9,8 @@ spring:
       enabled: always
   jpa:
     open-in-view: false
+#    properties:
+#      hibernate.hbm2ddl.auto: none
 
 logging:
   level:

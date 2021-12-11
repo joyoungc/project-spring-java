@@ -29,6 +29,12 @@
         </dependency>
 
         <dependency>
+            <groupId>io.joyoungc</groupId>
+            <artifactId>server-config</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.version}</version>

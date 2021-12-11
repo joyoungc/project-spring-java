@@ -16,9 +16,21 @@
     </parent>
 
     <dependencies>
+
+<!--        <dependency>-->
+<!--            <groupId>io.joyoungc</groupId>-->
+<!--            <artifactId>server-common</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <dependency>
@@ -62,7 +74,7 @@
     </dependencies>
 
     <properties>
-        <querydsl.version>4.2.1</querydsl.version>
+        <querydsl.version>5.0.0</querydsl.version>
     </properties>
 
     <build>
