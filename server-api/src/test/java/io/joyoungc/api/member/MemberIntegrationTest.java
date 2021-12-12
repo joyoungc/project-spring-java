@@ -1,8 +1,7 @@
-package io.joyoungc.api.controller;
+package io.joyoungc.api.member;
 
-import io.joyoungc.api.dto.UserDto;
-import io.joyoungc.api.service.UserService;
-import io.joyoungc.data.domain.user.User;
+import io.joyoungc.api.dto.MemberDto;
+import io.joyoungc.api.service.MemberService;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -23,44 +22,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserControllerTest {
+class MemberIntegrationTest {
 
     @LocalServerPort
     private int port;
 
     @Autowired
-    private UserService userService;
+    private MemberService memberService;
+
+    private static final String API_ENDPOINT = "/api/members";
 
     @Test
     @DisplayName("회원 등록")
     @Order(1)
     void createUser() {
-        String url = createUrlWithPort("/api/users", port);
+        String url = createUrlWithPort(API_ENDPOINT, port);
         given().log().all()
                 .contentType(ContentType.JSON)
                 .body(
-                        new UserDto.RequestUser("이름", "createId")
+                        new MemberDto.RequestUser("이름", "createId")
                 )
                 .when().post(url)
-                .then()
+                .then().log().body()
                 .statusCode(200);
     }
 
     @Test
-    @DisplayName("회원 조회")
+    @DisplayName("회원 전체 조회")
     @Order(2)
-    void getUser() {
-        String url = createUrlWithPort("/api/users", port);
+    void getMembers() {
+        String url = createUrlWithPort(API_ENDPOINT, port);
 
         // given
-        List<User> list = given().log().all()
+        Response response = given().log().all()
                 // when
                 .when().get(url)
                 // then
                 .then()
                 .log().body()
                 .statusCode(200)
-                .extract().body().jsonPath().getList(".", User.class);
+                .extract().response();
+
+        List<MemberDto.ResponseUser> list = response.jsonPath().getList(".", MemberDto.ResponseUser.class);
 
         assertThat(list).isNotEmpty().element(0).satisfies(
                 c -> {
@@ -72,10 +75,10 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("회원 조회(캐시)")
+    @DisplayName("회원 조회")
     @Order(3)
-    void getUserCache() {
-        String path = "/api/users/1";
+    void getMember() {
+        String path = API_ENDPOINT + "/1";
         String url = createUrlWithPort(path, port);
 
         Response response =
@@ -89,7 +92,7 @@ class UserControllerTest {
                         .statusCode(200)
                         .extract().response();
 
-        UserDto.ResponseUser object = response.jsonPath().getObject(".", UserDto.ResponseUser.class);
+        MemberDto.ResponseUser object = response.jsonPath().getObject(".", MemberDto.ResponseUser.class);
 
         assertThat(object).isNotNull().satisfies(
                 c -> {
@@ -108,16 +111,18 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("회원 목록 캐시 조회")
     void getCacheUser() {
         // 테스트 사용자 등록
-        UserDto.RequestUser requestUser = new UserDto.RequestUser("테스트", "생성자");
-        Long userId = userService.createUser(requestUser);
+        MemberDto.RequestUser requestUser = new MemberDto.RequestUser("테스트", "생성자");
+        Long userId = memberService.createMember(requestUser);
 
         // redis json
-        List<UserDto.ResponseUser> users = userService.getUsers();
+        List<MemberDto.ResponseUser> users = memberService.getMembers();
         assertThat(users).isNotEmpty();
 
-        List<UserDto.ResponseUser> users1 = userService.getUsers();
+        // 한번 더 조회시 캐시 여부 확인
+        List<MemberDto.ResponseUser> users1 = memberService.getMembers();
         assertThat(users1).isNotEmpty();
     }
 

@@ -21,18 +21,18 @@ import java.time.LocalDateTime;
 public abstract class AuditEntity {
 
     @CreatedBy
-    @Column(columnDefinition = "varchar(20) comment '생성자'")
+//    @Column(columnDefinition = "varchar(20) comment '생성자'")
     protected String createdBy;
 
     @CreatedDate
-    @Column(columnDefinition = "datetime comment '생성일'")
+//    @Column(columnDefinition = "datetime comment '생성일'")
     protected LocalDateTime createdDate;
 
     @LastModifiedBy
-    @Column(columnDefinition = "varchar(20) comment '수정자'")
+//    @Column(columnDefinition = "varchar(20) comment '수정자'")
     protected String modifiedBy;
 
     @LastModifiedDate
-    @Column(columnDefinition = "datetime comment '수정일'")
+//    @Column(columnDefinition = "datetime comment '수정일'")
     protected LocalDateTime modifiedDate;
 }

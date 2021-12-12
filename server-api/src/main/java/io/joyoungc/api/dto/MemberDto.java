@@ -8,11 +8,7 @@ import io.joyoungc.common.Constants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,7 +16,7 @@ import java.time.LocalDateTime;
 /***
  * Created by Aiden Jeong on 2021.09.22
  */
-public class UserDto {
+public class MemberDto {
 
     @Getter
     @Setter
