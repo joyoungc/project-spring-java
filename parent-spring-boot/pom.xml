@@ -37,7 +37,8 @@
 
     <properties>
         <spring-boot.version>2.5.4</spring-boot.version>
-        <modelmapper.version>2.4.4</modelmapper.version>
+        <modelmapper.version>2.4.5</modelmapper.version>
+        <parent-spring.version>0.0.1-SNAPSHOT</parent-spring.version>
     </properties>
 
 </project>

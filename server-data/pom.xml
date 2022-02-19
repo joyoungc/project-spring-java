@@ -17,11 +17,11 @@
 
     <dependencies>
 
-<!--        <dependency>-->
-<!--            <groupId>io.joyoungc</groupId>-->
-<!--            <artifactId>server-common</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.joyoungc</groupId>
+            <artifactId>server-common</artifactId>
+            <version>${server-project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,11 +58,18 @@
             <version>${querydsl.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.github.gavlyukovskiy</groupId>-->
-<!--            <artifactId>p6spy-spring-boot-starter</artifactId>-->
-<!--            <version>1.7.1</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-core</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.gavlyukovskiy</groupId>
+            <artifactId>p6spy-spring-boot-starter</artifactId>
+            <scope>test</scope>
+            <version>1.7.1</version>
+        </dependency>
 
         <!-- Logging for JDBC SQL -->
         <dependency>

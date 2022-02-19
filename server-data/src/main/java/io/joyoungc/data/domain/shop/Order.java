@@ -1,6 +1,7 @@
 package io.joyoungc.data.domain.shop;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "orders")
 @Getter
+@Setter // 테스트용
 public class Order {
 
     @Id

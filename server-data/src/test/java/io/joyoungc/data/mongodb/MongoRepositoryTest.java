@@ -14,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /***
  * Created by Aiden Jeong on 2021.12.13
+ *
+ * 도커 local-mongodb 컨테이너 실행 후 진행
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -31,6 +33,5 @@ class MongoRepositoryTest {
         System.out.println("all = " + all);
         List<Customer> list = customerRepository.findByFirstName("Aiden");
         assertThat(list).isNotEmpty().extracting(Customer::getFirstName).contains("Aiden");
-        // customerRepository.deleteAll();
     }
 }
