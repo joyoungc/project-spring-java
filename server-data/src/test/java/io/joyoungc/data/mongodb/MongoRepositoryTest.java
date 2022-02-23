@@ -1,7 +1,7 @@
 package io.joyoungc.data.mongodb;
 
-import io.joyoungc.data.domain.mongo.Customer;
-import io.joyoungc.data.domain.mongo.CustomerRepository;
+import io.joyoungc.data.mongo.Customer;
+import io.joyoungc.data.mongo.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

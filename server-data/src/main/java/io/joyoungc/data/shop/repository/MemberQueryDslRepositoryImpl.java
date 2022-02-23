@@ -1,23 +1,24 @@
-package io.joyoungc.data.domain.shop;
+package io.joyoungc.data.shop.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.joyoungc.data.shop.domain.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import static io.joyoungc.data.shop.domain.QMember.member;
 
 /***
  * Created by Aiden Jeong on 2022.02.18
  */
-@Repository
 @RequiredArgsConstructor
-public class MemberQueryDslRepository {
+public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 
     private final JPAQueryFactory queryFactory;
 
     public List<Member> findMembers() {
         return queryFactory
-                .selectFrom(QMember.member)
+                .selectFrom(member)
                 .fetch();
     }
 

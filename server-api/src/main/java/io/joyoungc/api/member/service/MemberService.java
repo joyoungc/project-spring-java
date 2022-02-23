@@ -1,8 +1,8 @@
-package io.joyoungc.api.service;
+package io.joyoungc.api.member.service;
 
 import io.joyoungc.api.dto.MemberDto;
-import io.joyoungc.data.domain.shop.Member;
-import io.joyoungc.data.domain.shop.MemberRepository;
+import io.joyoungc.data.shop.domain.Member;
+import io.joyoungc.data.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

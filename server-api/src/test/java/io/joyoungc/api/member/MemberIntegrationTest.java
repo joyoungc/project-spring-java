@@ -1,7 +1,7 @@
 package io.joyoungc.api.member;
 
 import io.joyoungc.api.dto.MemberDto;
-import io.joyoungc.api.service.MemberService;
+import io.joyoungc.api.member.service.MemberService;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;

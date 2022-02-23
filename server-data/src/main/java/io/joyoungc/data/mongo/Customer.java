@@ -1,4 +1,4 @@
-package io.joyoungc.data.domain.mongo;
+package io.joyoungc.data.mongo;
 
 import lombok.Getter;
 import lombok.ToString;

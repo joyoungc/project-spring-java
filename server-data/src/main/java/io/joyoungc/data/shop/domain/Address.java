@@ -1,4 +1,4 @@
-package io.joyoungc.data.domain.shop;
+package io.joyoungc.data.shop.domain;
 
 import lombok.Getter;
 

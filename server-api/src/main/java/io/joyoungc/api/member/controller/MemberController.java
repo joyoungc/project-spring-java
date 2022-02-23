@@ -1,7 +1,7 @@
-package io.joyoungc.api.controller;
+package io.joyoungc.api.member.controller;
 
 import io.joyoungc.api.dto.MemberDto;
-import io.joyoungc.api.service.MemberService;
+import io.joyoungc.api.member.service.MemberService;
 import io.joyoungc.common.CommonResponse;
 import io.joyoungc.common.ResponseCode;
 import lombok.RequiredArgsConstructor;
