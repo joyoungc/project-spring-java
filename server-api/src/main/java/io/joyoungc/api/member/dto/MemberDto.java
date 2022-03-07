@@ -1,4 +1,4 @@
-package io.joyoungc.api.dto;
+package io.joyoungc.api.member.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

@@ -1,19 +1,16 @@
 package io.joyoungc.api.member.service;
 
-import io.joyoungc.api.dto.MemberDto;
+import io.joyoungc.api.member.dto.MemberDto;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static io.joyoungc.api.ApiCodes.Cache.Constants.CACHE_USER_LIST;
 
 /***
  * Created by Aiden Jeong on 2021.11.14
@@ -33,7 +30,6 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = CACHE_USER_LIST)
     public List<MemberDto.ResponseUser> getMembers() {
         List<Member> all = memberRepository.findAll();
         return all.stream().map(o -> modelMapper.map(o, MemberDto.ResponseUser.class)).collect(Collectors.toList());
