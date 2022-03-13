@@ -23,6 +23,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final ModelMapper modelMapper;
 
+    @Transactional
+    public Long createMember(MemberDto.RequestUser dto) {
+        Member member = modelMapper.map(dto, Member.class);
+        Member save = memberRepository.save(member);
+        return save.getId();
+    }
+
     @Transactional(readOnly = true)
     public MemberDto.ResponseUser getMember(long userId) {
         Member member = memberRepository.getById(userId);
@@ -30,8 +37,8 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberDto.ResponseUser> getMembers() {
-        List<Member> all = memberRepository.findAll();
+    public List<MemberDto.ResponseUser> getMembers(MemberDto.Search search) {
+        List<Member> all = memberRepository.findMembers(search.getGrade());
         return all.stream().map(o -> modelMapper.map(o, MemberDto.ResponseUser.class)).collect(Collectors.toList());
     }
 
@@ -41,12 +48,5 @@ public class MemberService {
 //        User user = memberRepository.getById(userId);
 //        return modelMapper.map(user, MemberDto.ResponseUser2.class);
 //    }
-
-    @Transactional
-    public Long createMember(MemberDto.RequestUser dto) {
-        Member member = modelMapper.map(dto, Member.class);
-        Member save = memberRepository.save(member);
-        return save.getId();
-    }
 
 }

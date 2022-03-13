@@ -1,6 +1,6 @@
 package io.joyoungc.api.order.service;
 
-import io.joyoungc.api.TestConfig;
+import io.joyoungc.api.TestJpaConfig;
 import io.joyoungc.data.shop.domain.Grade;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.domain.Order;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 @Slf4j
 @RequiredArgsConstructor
-@TestConfig
+@TestJpaConfig
 class OrderServiceTest {
 
     private final OrderService orderService;

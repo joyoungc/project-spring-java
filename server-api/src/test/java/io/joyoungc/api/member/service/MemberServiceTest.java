@@ -1,7 +1,8 @@
 package io.joyoungc.api.member.service;
 
-import io.joyoungc.api.TestConfig;
+import io.joyoungc.api.TestJpaConfig;
 import io.joyoungc.api.member.dto.MemberDto;
+import io.joyoungc.data.shop.domain.Grade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Order;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @RequiredArgsConstructor
-@TestConfig
+@TestJpaConfig
 class MemberServiceTest {
 
     private final MemberService memberService;
@@ -24,6 +25,7 @@ class MemberServiceTest {
     @Order(0)
     void createMember() {
         MemberDto.RequestUser requestUser = new MemberDto.RequestUser("생성", "test");
+        requestUser.setGrade(Grade.VIP);
         memberId = memberService.createMember(requestUser);
     }
 
@@ -38,7 +40,9 @@ class MemberServiceTest {
     @Test
     @Order(1)
     void getMembers() {
-        List<MemberDto.ResponseUser> members = memberService.getMembers();
+        MemberDto.Search search = new MemberDto.Search();
+        search.setGrade(Grade.VIP);
+        List<MemberDto.ResponseUser> members = memberService.getMembers(search);
         assertThat(members).isNotEmpty()
                 .extracting(MemberDto.ResponseUser::getId).contains(memberId);
     }

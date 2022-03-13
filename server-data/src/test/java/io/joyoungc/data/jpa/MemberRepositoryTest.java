@@ -3,6 +3,7 @@ package io.joyoungc.data.jpa;
 import com.github.gavlyukovskiy.boot.jdbc.decorator.DataSourceDecoratorAutoConfiguration;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.joyoungc.data.configuration.DataConfig;
+import io.joyoungc.data.shop.domain.Grade;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.domain.Order;
 import io.joyoungc.data.shop.repository.MemberRepository;
@@ -67,10 +68,10 @@ class MemberRepositoryTest {
     @DisplayName("QueryDsl 레포지토리 테스트")
     void testQueryDsl() {
         String testName = "테스트1";
-        Member member = new Member(testName);
+        Member member = new Member(testName, Grade.BASIC);
         memberRepository.save(member);
 
-        List<Member> members = memberRepository.findMembers();
+        List<Member> members = memberRepository.findMembers(Grade.BASIC);
         assertThat(members).isNotEmpty();
     }
 

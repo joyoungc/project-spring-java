@@ -3,7 +3,7 @@
 
 ## Config Modules
 
-### redis 설치
+### 1. redis 설치
 ```shell
 $ docker run --name local-redis -p 6379:6379 -d redis:5.0
 ```

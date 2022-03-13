@@ -28,8 +28,8 @@ public class MemberController {
      * @return
      */
     @GetMapping
-    public List<MemberDto.ResponseUser> getMembers() {
-        return memberService.getMembers();
+    public List<MemberDto.ResponseUser> getMembers(MemberDto.Search search) {
+        return memberService.getMembers(search);
     }
 
     /**

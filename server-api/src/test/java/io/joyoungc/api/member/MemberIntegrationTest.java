@@ -1,11 +1,15 @@
 package io.joyoungc.api.member;
 
+import io.joyoungc.api.TestJpaConfig;
 import io.joyoungc.api.member.dto.MemberDto;
 import io.joyoungc.api.member.service.MemberService;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,8 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
+@TestJpaConfig
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MemberIntegrationTest {
 
     @LocalServerPort
@@ -48,7 +52,7 @@ class MemberIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원 전체 조회")
+    @DisplayName("회원 목록 조회")
     @Order(2)
     void getMembers() {
         String url = createUrlWithPort(API_ENDPOINT, port);
@@ -112,17 +116,19 @@ class MemberIntegrationTest {
 
     @Test
     @DisplayName("회원 목록 캐시 조회")
+    @Disabled
     void getCacheUser() {
         // 테스트 사용자 등록
         MemberDto.RequestUser requestUser = new MemberDto.RequestUser("테스트", "생성자");
         Long userId = memberService.createMember(requestUser);
 
+        MemberDto.Search search = new MemberDto.Search();
         // redis json
-        List<MemberDto.ResponseUser> users = memberService.getMembers();
+        List<MemberDto.ResponseUser> users = memberService.getMembers(search);
         assertThat(users).isNotEmpty();
 
         // 한번 더 조회시 캐시 여부 확인
-        List<MemberDto.ResponseUser> users1 = memberService.getMembers();
+        List<MemberDto.ResponseUser> users1 = memberService.getMembers(search);
         assertThat(users1).isNotEmpty();
     }
 

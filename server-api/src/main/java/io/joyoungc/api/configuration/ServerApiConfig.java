@@ -32,6 +32,11 @@ public class ServerApiConfig {
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
 
+    /**
+     * Redis 설정
+     *
+     * @return
+     */
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return builder -> {

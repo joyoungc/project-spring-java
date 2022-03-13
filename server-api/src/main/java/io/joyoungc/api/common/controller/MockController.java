@@ -1,4 +1,4 @@
-package io.joyoungc.api.member.controller;
+package io.joyoungc.api.common.controller;
 
 import io.joyoungc.common.Constants;
 import lombok.extern.slf4j.Slf4j;

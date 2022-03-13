@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.joyoungc.common.Constants;
+import io.joyoungc.data.shop.domain.Grade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,12 +21,20 @@ public class MemberDto {
 
     @Getter
     @Setter
+    public static class Search {
+        private Grade grade;
+    }
+
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class RequestUser {
         @NotBlank
         private String name;
         @NotBlank
         private String createdBy;
+
+        private Grade grade = Grade.BASIC;
 
         public RequestUser(String name, String createdBy) {
             this.name = name;
