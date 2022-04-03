@@ -25,3 +25,8 @@ logging:
       connection: off
       resultsettable: info
       resultset: off
+
+decorator:
+  datasource:
+    p6spy:
+      multiline: true

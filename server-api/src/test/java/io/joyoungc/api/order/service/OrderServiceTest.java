@@ -3,7 +3,6 @@ package io.joyoungc.api.order.service;
 import io.joyoungc.api.TestJpaConfig;
 import io.joyoungc.data.shop.domain.Grade;
 import io.joyoungc.data.shop.domain.Member;
-import io.joyoungc.data.shop.domain.Order;
 import io.joyoungc.data.shop.domain.Product;
 import io.joyoungc.data.shop.repository.MemberRepository;
 import io.joyoungc.data.shop.repository.ProductRepository;
@@ -25,8 +24,8 @@ class OrderServiceTest {
     void createOrder() {
         Member member = memberRepository.save(new Member("이름", Grade.VIP));
         Product product = productRepository.save(new Product("상품", 10000L));
-        Order order = orderService.createOrder(member.getId(), product.getId());
-        log.debug("## order : {}", order);
-        Assertions.assertThat(order).isNotNull();
+        Long orderId = orderService.createOrder(member.getId(), product.getId());
+        log.debug("## order : {}", orderId);
+        Assertions.assertThat(orderId).isNotNull();
     }
 }

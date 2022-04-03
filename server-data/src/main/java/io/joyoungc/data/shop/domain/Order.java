@@ -49,4 +49,8 @@ public class Order extends AuditEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    public void updateOrder(OrderStatus status) {
+        this.status = status;
+    }
+
 }

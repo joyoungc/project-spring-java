@@ -18,9 +18,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static io.joyoungc.api.TestUtils.createUrlWithPort;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
@@ -130,10 +130,6 @@ class MemberIntegrationTest {
         // 한번 더 조회시 캐시 여부 확인
         List<MemberDto.ResponseUser> users1 = memberService.getMembers(search);
         assertThat(users1).isNotEmpty();
-    }
-
-    public String createUrlWithPort(String uri, int port) {
-        return String.format("http://localhost:%s%s", port, uri);
     }
 
 }
