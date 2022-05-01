@@ -50,6 +50,44 @@ public class JpaTest {
     private EntityManager em;
 
     @Test
+    @DisplayName("연관관계 주인")
+    void mappedByTest() {
+
+        Member member1 = new Member("테스트1");
+
+        em.persist(member1);
+
+        Order order1 = new Order(member1, null, 100L, LocalDateTime.now());
+        Order order2 = new Order(member1, null, 200L, LocalDateTime.now().minusDays(1));
+        Order order3 = new Order(member1, null, 300L, LocalDateTime.now().minusDays(3));
+
+        em.persist(order1);
+        em.persist(order2);
+        em.persist(order3);
+
+        em.flush();
+        em.clear();
+
+//        Member member2 = new Member("테스트2");
+//
+//        em.persist(member2);
+
+//        Member member = order1.getMember();
+//        member.setName("변경자");
+
+        Member member = memberRepository.findById(1L).orElse(null);
+
+        Order order4 = new Order(member, null, 2345678L, LocalDateTime.now().minusDays(3));
+
+        member.getOrders().add(order4);
+
+        em.flush();
+
+        System.out.println("order = " + order);
+
+    }
+
+    @Test
     @DisplayName("N + 1 호출")
     void selectAll() {
         makeTestData();

@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'project'
+include 'server-common'
+include 'server-api'
+include 'server-config'
+include 'server-data'
