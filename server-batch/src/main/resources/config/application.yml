@@ -1,12 +1,14 @@
 server:
-  port: 9010
+  port: 9040
   shutdown: graceful
 
 # 스프링 프레임워크 설정
 spring:
-  output:
-    ansi:
-      enabled: always
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
   jpa:
     open-in-view: false
 #    properties:
@@ -16,10 +18,12 @@ spring:
 
 logging:
   level:
+    root: info
+    org.springframework.batch: info
     jdbc:
-      sqlonly: info
+      sqlonly: off
       sqltiming: off
       audit: off
       connection: off
-      resultsettable: info
+      resultsettable: off
       resultset: off
