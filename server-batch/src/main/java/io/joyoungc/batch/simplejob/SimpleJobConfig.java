@@ -1,7 +1,8 @@
 
 package io.joyoungc.batch.simplejob;
 
-import io.joyoungc.batch.simplejob.item.*;
+import io.joyoungc.batch.example.item.*;
+import io.joyoungc.batch.simplejob.item.SimpleJobParameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

@@ -1,5 +1,5 @@
 
-package io.joyoungc.batch.simplejob.item;
+package io.joyoungc.batch.example.item;
 
 
 import org.springframework.batch.item.ItemReader;

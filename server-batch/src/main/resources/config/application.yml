@@ -21,9 +21,9 @@ logging:
     root: info
     org.springframework.batch: info
     jdbc:
-      sqlonly: off
+      sqlonly: info
       sqltiming: off
       audit: off
       connection: off
-      resultsettable: off
+      resultsettable: info
       resultset: off

@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2022 LINE Corporation. All rights reserved.
- * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
-package io.joyoungc.batch.simplejob.item;
+package io.joyoungc.batch.example.item;
 
 import org.springframework.batch.item.ItemWriter;
 
