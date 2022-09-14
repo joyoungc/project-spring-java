@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import io.joyoungc.api.configuration.format.annotation.TimestampToDate;
 import io.joyoungc.common.Constants;
 import io.joyoungc.data.shop.domain.Grade;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /***
  * Created by Aiden Jeong on 2021.09.22
@@ -66,5 +68,16 @@ public class MemberDto {
         private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
         private Long id;
         private String name;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class RequestConversion {
+        @TimestampToDate
+        private Date date;
+
+        @TimestampToDate
+        private LocalDateTime localDateTime;
     }
 }

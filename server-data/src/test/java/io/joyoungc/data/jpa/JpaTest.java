@@ -31,7 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 /***
  * Created by Aiden Jeong on 2022.04.02
  */
-@ExtendWith(SpringExtension.class)
 @DataJpaTest(showSql = false)
 @Import(DataConfig.class)
 @ImportAutoConfiguration(DataSourceDecoratorAutoConfiguration.class)

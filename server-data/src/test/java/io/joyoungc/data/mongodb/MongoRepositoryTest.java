@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * 도커 local-mongodb 컨테이너 실행 후 진행
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class MongoRepositoryTest {
     @Autowired

@@ -23,7 +23,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-@ExtendWith(SpringExtension.class)
 @TestJpaConfig
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MemberIntegrationTest {
