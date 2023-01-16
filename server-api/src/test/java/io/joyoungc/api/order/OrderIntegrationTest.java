@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestJpaConfig
 @RequiredArgsConstructor
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OrderIntegrationTest {
+class OrderIntegrationTest {
 
     @LocalServerPort
     private int port;
