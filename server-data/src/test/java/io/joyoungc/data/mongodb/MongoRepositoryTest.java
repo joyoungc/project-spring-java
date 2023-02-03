@@ -2,6 +2,7 @@ package io.joyoungc.data.mongodb;
 
 import io.joyoungc.data.mongo.Customer;
 import io.joyoungc.data.mongo.CustomerRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * 도커 local-mongodb 컨테이너 실행 후 진행
  */
+@Disabled
 @SpringBootTest
 class MongoRepositoryTest {
     @Autowired
