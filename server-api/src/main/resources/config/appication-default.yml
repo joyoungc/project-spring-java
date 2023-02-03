@@ -10,7 +10,3 @@ spring:
 #  redis:
 #    host: localhost
 #    port: 6379
-
-  # AutoConfiguration 설정
-#  autoconfigure:
-#    exclude: com.integralblue.log4jdbc.spring.Log4jdbcAutoConfiguration
