@@ -21,7 +21,7 @@ class OrderServiceTest {
     private final ProductRepository productRepository;
 
     @Test
-    void createOrder() {
+    void create_order() {
         Member member = memberRepository.save(new Member("이름", Grade.VIP));
         Product product = productRepository.save(new Product("상품", 10000L));
         Long orderId = orderService.createOrder(member.getId(), product.getId());

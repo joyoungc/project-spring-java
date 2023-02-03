@@ -36,9 +36,8 @@ class MemberIntegrationTest {
     private static final String API_ENDPOINT = "/api/members";
 
     @Test
-    @DisplayName("회원 등록")
     @Order(1)
-    void createUser() {
+    void create_member() {
         String url = createUrlWithPort(API_ENDPOINT, port);
         given().log().all()
                 .contentType(ContentType.JSON)
@@ -51,9 +50,8 @@ class MemberIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원 목록 조회")
     @Order(2)
-    void getMembers() {
+    void get_members() {
         String url = createUrlWithPort(API_ENDPOINT, port);
 
         // given
@@ -78,9 +76,8 @@ class MemberIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원 조회")
     @Order(3)
-    void getMember() {
+    void get_member() {
         String path = API_ENDPOINT + "/1";
         String url = createUrlWithPort(path, port);
 
@@ -114,9 +111,8 @@ class MemberIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원 목록 캐시 조회")
     @Disabled
-    void getCacheUser() {
+    void get_cached_members() {
         // 테스트 사용자 등록
         MemberDto.RequestUser requestUser = new MemberDto.RequestUser("테스트", "생성자");
         Long userId = memberService.createMember(requestUser);

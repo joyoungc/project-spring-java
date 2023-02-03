@@ -23,7 +23,7 @@ class MemberServiceTest {
 
     @Test
     @Order(0)
-    void createMember() {
+    void create_member() {
         MemberDto.RequestUser requestUser = new MemberDto.RequestUser("생성", "test");
         requestUser.setGrade(Grade.VIP);
         memberId = memberService.createMember(requestUser);
@@ -31,7 +31,7 @@ class MemberServiceTest {
 
     @Test
     @Order(1)
-    void getMember() {
+    void get_member() {
         MemberDto.ResponseUser member = memberService.getMember(memberId);
         assertThat(member).isNotNull();
         assertThat(member.getId()).isEqualTo(memberId);
@@ -39,7 +39,7 @@ class MemberServiceTest {
 
     @Test
     @Order(1)
-    void getMembers() {
+    void get_members() {
         MemberDto.Search search = new MemberDto.Search();
         search.setGrade(Grade.VIP);
         List<MemberDto.ResponseUser> members = memberService.getMembers(search);

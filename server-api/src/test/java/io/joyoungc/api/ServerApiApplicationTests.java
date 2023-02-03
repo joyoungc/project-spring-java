@@ -18,7 +18,7 @@ class ServerApiApplicationTests {
     Environment env;
 
     @Test
-    void propertiesTest() {
+    void properties_test() {
         Assertions.assertThat(env.getProperty("server.port")).isEqualTo("9010");
         Assertions.assertThat(env.getProperty("spring.output.ansi.enabled")).isEqualTo("always");
         Assertions.assertThat(env.getProperty("logging.level.jdbc.sqlonly")).isEqualTo("info");

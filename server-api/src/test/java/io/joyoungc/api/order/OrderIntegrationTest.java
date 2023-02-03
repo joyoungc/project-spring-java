@@ -37,9 +37,6 @@ class OrderIntegrationTest {
 
     @LocalServerPort
     private int port;
-
-    @Autowired
-    private MemberService memberService;
     private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
 
@@ -57,9 +54,8 @@ class OrderIntegrationTest {
     }
 
     @Test
-    @DisplayName("주문 등록")
     @Order(1)
-    void createOrder() {
+    void create_order() {
         init();
         String url = createUrlWithPort(API_ENDPOINT, port);
         OrderDto.RequestCreate create = new OrderDto.RequestCreate();
@@ -76,9 +72,8 @@ class OrderIntegrationTest {
     }
 
     @Test
-    @DisplayName("회원 주문 조회")
     @Order(2)
-    void getMemberOrders() {
+    void get_member_orders() {
         String url = createUrlWithPort(API_ENDPOINT, port) + "?memberId=" + memberId;
 
         // given

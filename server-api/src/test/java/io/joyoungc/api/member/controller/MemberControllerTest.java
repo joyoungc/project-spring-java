@@ -25,7 +25,7 @@ class MemberControllerTest {
     private static final String API_ENDPOINT = "/api/members";
 
     @Test
-    void customFormatterExecutedCorrectly() throws Exception {
+    void custom_formatter_executed_correctly() throws Exception {
         mockMvc.perform(get(API_ENDPOINT + "/custom-formatter")
                         .param("date", "12314523556")
                         .param("localDateTime", "1012314523556")
