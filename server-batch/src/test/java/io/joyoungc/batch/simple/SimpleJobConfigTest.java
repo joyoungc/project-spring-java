@@ -18,7 +18,7 @@ class SimpleJobConfigTest {
     private JobLauncherTestUtils jobLauncherTestUtils;
 
     @Test
-    void executeSimpleJob() throws Exception {
+    void execute_SimpleJob() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("name","it's me")
                 .addLong("age", 40L)

@@ -40,7 +40,7 @@ class MemberRepositoryTest {
 
     @Test
     @DisplayName("QueryDsl 레포지토리 테스트")
-    void testQueryDsl() {
+    void test_QueryDsl() {
         String testName = "테스트1";
         Member member = new Member(testName, Grade.BASIC);
         memberRepository.save(member);
@@ -48,7 +48,5 @@ class MemberRepositoryTest {
         List<Member> members = memberRepository.findMembers(Grade.BASIC);
         assertThat(members).isNotEmpty();
     }
-
-
 
 }

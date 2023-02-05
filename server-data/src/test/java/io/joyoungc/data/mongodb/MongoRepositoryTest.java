@@ -25,7 +25,7 @@ class MongoRepositoryTest {
     CustomerRepository customerRepository;
 
     @Test
-    void mongoTest() {
+    void mongo_save_and_findAll() {
         Customer customer1 = new Customer("1","Aiden", "Jeong");
         Customer customer2 = new Customer("2","Biden", "Young");
         customerRepository.save(customer1);

@@ -28,7 +28,7 @@ class TestContainerTest {
     }
 
     @Test
-    void test() {
+    void get_member() {
         Optional<Member> optionalMember = memberRepository.findById(1L);
         assertThat(optionalMember).isNotEmpty();
     }

@@ -25,7 +25,7 @@ class MemberRepositoryTest {
     EntityManager entityManager;
 
     @Test
-    void findById() {
+    void find_by_id() {
         // given
         Member save = memberRepository.save(new Member("MyName", Grade.VIP));
 
@@ -38,7 +38,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void findMembers() {
+    void find_members() {
         // given
         memberRepository.save(new Member("MyName", Grade.VIP));
 

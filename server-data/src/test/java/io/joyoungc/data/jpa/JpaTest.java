@@ -48,7 +48,7 @@ class JpaTest {
 
     @Test
     @DisplayName("연관관계 주인")
-    void mappedByTest() {
+    void test_mapped_by() {
         // given
         Member member1 = new Member("테스트1");
         em.persist(member1);
@@ -75,7 +75,7 @@ class JpaTest {
 
     @Test
     @DisplayName("N + 1 호출")
-    void selectAll() {
+    void select_all() {
 
         Member member1 = new Member("테스트1");
         em.persist(member1);
@@ -112,7 +112,7 @@ class JpaTest {
 
     @Test
     @DisplayName("QueryDsl 로 N + 1 조회 회피")
-    void useQueryDsl() {
+    void use_QueryDsl() {
         makeTestData();
 
         List<Tuple> tuples = queryFactory
@@ -138,7 +138,7 @@ class JpaTest {
 
     @Test
     @DisplayName("영속성 예외 케이스 테스트(1차 캐시)")
-    void testPersistence() {
+    void test_persistence() {
         makeTestData();
         Member result = queryFactory
                 .selectFrom(member)

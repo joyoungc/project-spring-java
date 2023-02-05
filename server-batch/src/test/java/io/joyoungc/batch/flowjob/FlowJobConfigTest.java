@@ -19,7 +19,7 @@ class FlowJobConfigTest {
     private JobLauncherTestUtils jobLauncherTestUtils;
 
     @Test
-    void executeFlowJobWithJobStopIsFalse() throws Exception {
+    void execute_FlowJob_with_JobStop_is_false() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("isJobStop", Boolean.FALSE.toString())
                 .toJobParameters();
@@ -29,7 +29,7 @@ class FlowJobConfigTest {
     }
 
     @Test
-    void executeFlowJobWithJobStopIsTrue() throws Exception {
+    void execute_FlowJob_with_JobStop_is_true() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("isJobStop", Boolean.TRUE.toString())
                 .toJobParameters();
