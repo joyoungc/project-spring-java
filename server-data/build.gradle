@@ -22,4 +22,8 @@ dependencies {
     testImplementation 'org.testcontainers:mysql:1.17.4'
 }
 
-
+test {
+    testLogging {
+        showStandardStreams = true // Print standard out and standard error to the console.
+    }
+}
