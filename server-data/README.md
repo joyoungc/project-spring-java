@@ -47,3 +47,8 @@ root@82fd6f4cc3b7:/# mongo
 //person 컬랙션의 제거
 > db.person.drop();
 ```
+
+
+### TestContainers 사용을 위한 Colima 설치 및 설정
+- 설치 : https://balhae79.tistory.com/389
+- TestContainers 설정 : https://balhae79.tistory.com/390
