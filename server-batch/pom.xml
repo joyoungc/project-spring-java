@@ -14,6 +14,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.joyoungc</groupId>
+            <artifactId>server-common</artifactId>
+            <version>${server-project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.joyoungc</groupId>
+            <artifactId>server-data</artifactId>
+            <version>${server-project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>

@@ -5,9 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>server-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <parent>
-        <artifactId>project-spring-java</artifactId>
         <groupId>io.joyoungc</groupId>
+        <artifactId>project-spring-java</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
 </project>
