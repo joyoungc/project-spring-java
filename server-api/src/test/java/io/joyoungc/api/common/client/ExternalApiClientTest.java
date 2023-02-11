@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExternalApiClientTest {
-    ExternalApiClient externalApiClient;
+    HttpApiClient externalApiClient;
 
     @BeforeEach
     void setUp() {

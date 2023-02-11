@@ -6,7 +6,7 @@
     <artifactId>server-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <parent>
-        <artifactId>project</artifactId>
+        <artifactId>project-spring-java</artifactId>
         <groupId>io.joyoungc</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
