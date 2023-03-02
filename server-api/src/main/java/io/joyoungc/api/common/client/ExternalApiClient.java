@@ -29,7 +29,7 @@ public class ExternalApiClient implements HttpApiClient {
                 }
                 return null;
             });
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
         return responseBody;
