@@ -1,0 +1,12 @@
+{
+  "hello.world": {
+    "ko": "[json]안녕하세요 세상",
+    "ja": "[json]こんにちは世界",
+    "en": "[json]hello world"
+  },
+  "number.1": {
+    "ko": "[json]하나",
+    "ja": "[json]いち",
+    "en": "[json]One"
+  }
+}
