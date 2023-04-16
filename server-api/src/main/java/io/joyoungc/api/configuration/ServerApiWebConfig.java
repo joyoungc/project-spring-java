@@ -18,6 +18,6 @@ public class ServerApiWebConfig implements WebMvcConfigurer {
 
     @Bean
     public MessageSource messageSource() {
-        return new JsonMessageSource();
+        return new JsonMessageSource("i18n");
     }
 }
