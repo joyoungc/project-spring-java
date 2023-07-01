@@ -16,7 +16,7 @@ public class MessageResourceLoader {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final Charset encoding = StandardCharsets.UTF_8;
-    private final TypeReference<HashMap<String, String>> typeReference = new TypeReference<>() {};
+    private final TypeReference<HashMap<String, String>> typeReference = new TypeReference<HashMap<String, String>>() {};
 
     public Map<String, String> getMessageMap(String location, String locale) {
         Resource resource = new ClassPathResource(location + "/messages_" + locale + ".json");

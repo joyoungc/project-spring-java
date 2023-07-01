@@ -44,7 +44,7 @@ public class ServerApiConfig {
             for (ApiCodes.Cache cache : ApiCodes.Cache.values()) {
                 caches.put(cache.getName(), RedisCacheConfiguration.defaultCacheConfig()
                         .disableCachingNullValues()
-                        .prefixCacheNameWith(activeProfile + "::")
+                        .prefixKeysWith(activeProfile + "::")
                         .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
                         .entryTtl(cache.getTtl())
                 );

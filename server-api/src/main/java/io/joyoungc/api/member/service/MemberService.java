@@ -1,6 +1,8 @@
 package io.joyoungc.api.member.service;
 
 import io.joyoungc.api.member.dto.MemberDto;
+import io.joyoungc.common.CommonError;
+import io.joyoungc.common.exception.ApplicationException;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,8 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public MemberDto.ResponseUser getMember(long userId) {
-        Member member = memberRepository.getById(userId);
+        Member member =
+                memberRepository.findById(userId).orElseThrow(() -> new ApplicationException(CommonError.COMMON_NOT_FOUND));
         return modelMapper.map(member, MemberDto.ResponseUser.class);
     }
 
