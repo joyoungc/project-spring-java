@@ -1,5 +1,19 @@
 # server-data
 
+## TEST
+- Default
+```shell
+./gradlew -p server-data clean test
+```
+- TestContainers
+```shell
+./gradlew -p server-data clean test -Dspring.profiles.active=testcontainers
+```
+- mongoDB
+```shell
+./gradlew -p server-data clean test -Dspring.profiles.active=mongo
+```
+
 ## DB Modules
 
 ### mongoDB
