@@ -3,7 +3,7 @@ spring:
     ansi:
       enabled: always
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: app
     password: password
@@ -21,6 +21,10 @@ logging:
       connection: off
       resultsettable: info
       resultset: off
+    org:
+      springframework:
+        jdbc:
+          datasource: DEBUG
 
 decorator:
   datasource:
