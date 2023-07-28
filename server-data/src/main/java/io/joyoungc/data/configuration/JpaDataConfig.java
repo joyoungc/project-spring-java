@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  */
 @Configuration
 @EnableJpaAuditing(modifyOnCreate = false)
-public class DataConfig {
+public class JpaDataConfig {
 
     @PersistenceContext
     private EntityManager entityManager;
