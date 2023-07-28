@@ -1,6 +1,6 @@
 package io.joyoungc.data.shop.repository;
 
-import io.joyoungc.data.configuration.DataConfig;
+import io.joyoungc.data.configuration.JpaDataConfig;
 import io.joyoungc.data.shop.domain.Grade;
 import io.joyoungc.data.shop.domain.Member;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Import(DataConfig.class)
+@Import(JpaDataConfig.class)
 class MemberRepositoryTest {
 
     @Autowired
