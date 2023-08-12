@@ -4,7 +4,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.joyoungc.common.CommonError;
 import io.joyoungc.common.exception.ApplicationException;
-import io.joyoungc.data.BaseDataJpaTest;
+import io.joyoungc.data.BaseJpaRepositoryTest;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.domain.Order;
 import io.joyoungc.data.shop.repository.MemberRepository;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /***
  * Created by Aiden Jeong on 2022.04.02
  */
-class SimpleJpaTest extends BaseDataJpaTest {
+class SimpleJpaTest extends BaseJpaRepositoryTest {
 
     @Autowired
     private JPAQueryFactory queryFactory;
