@@ -1,20 +1,16 @@
 package io.joyoungc.data.jpa;
 
-import com.github.gavlyukovskiy.boot.jdbc.decorator.DataSourceDecoratorAutoConfiguration;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.joyoungc.common.CommonError;
 import io.joyoungc.common.exception.ApplicationException;
-import io.joyoungc.data.configuration.JpaDataConfig;
+import io.joyoungc.data.BaseDataJpaTest;
 import io.joyoungc.data.shop.domain.Member;
 import io.joyoungc.data.shop.domain.Order;
 import io.joyoungc.data.shop.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.Rollback;
 
 import javax.persistence.EntityManager;
@@ -28,10 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /***
  * Created by Aiden Jeong on 2022.04.02
  */
-@DataJpaTest(showSql = false)
-@Import(JpaDataConfig.class)
-@ImportAutoConfiguration(DataSourceDecoratorAutoConfiguration.class)
-class SimpleJpaTest {
+class SimpleJpaTest extends BaseDataJpaTest {
 
     @Autowired
     private JPAQueryFactory queryFactory;
