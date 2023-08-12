@@ -1,12 +1,10 @@
 package io.joyoungc.data.shop.repository;
 
-import io.joyoungc.data.configuration.JpaDataConfig;
+import io.joyoungc.data.BaseDataJpaTest;
 import io.joyoungc.data.shop.domain.Grade;
 import io.joyoungc.data.shop.domain.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,9 +12,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@Import(JpaDataConfig.class)
-class MemberRepositoryTest {
+class MemberRepositoryTest extends BaseDataJpaTest {
 
     @Autowired
     MemberRepository memberRepository;
