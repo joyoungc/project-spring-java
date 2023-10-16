@@ -54,9 +54,4 @@ public class MemberController {
         return memberService.getMember(id);
     }
 
-    @GetMapping("/custom-formatter")
-    public MemberDto.RequestConversion customFormatter(MemberDto.RequestConversion requestConversion) {
-        return requestConversion;
-    }
-
 }

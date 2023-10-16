@@ -1,12 +1,10 @@
-package io.joyoungc.api.member.controller;
+package io.joyoungc.api.common.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.joyoungc.api.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -23,19 +21,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = MemberController.class)
-class MemberControllerTest {
+@WebMvcTest(controllers = MockController.class)
+class MockControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
-    @MockBean
-    MemberService memberService;
-
     @Autowired
     ObjectMapper objectMapper;
 
-    private static final String API_ENDPOINT = "/api/members";
+    private static final String API_ENDPOINT = "/api/mock";
 
     @Test
     void custom_formatter_executed_correctly() throws Exception {
