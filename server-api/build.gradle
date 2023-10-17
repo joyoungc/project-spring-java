@@ -4,12 +4,12 @@ bootJar {
 }
 
 dependencies {
-    implementation('org.modelmapper:modelmapper')
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.springframework.boot:spring-boot-starter-validation')
-    implementation('org.springframework.boot:spring-boot-starter-test')
-    implementation('commons-io:commons-io:2.11.0')
-    testImplementation('io.rest-assured:rest-assured')
-    testImplementation('com.github.tomakehurst:wiremock-jre8:2.35.0')
-    implementation('org.apache.httpcomponents.client5:httpclient5:5.2.1')
+    implementation("org.modelmapper:modelmapper")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("commons-io:commons-io:2.11.0")
+    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.1")
+    implementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
 }
