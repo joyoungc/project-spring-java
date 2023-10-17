@@ -6,8 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
 
@@ -30,19 +29,19 @@ subprojects {
 
     dependencyManagement {
         dependencies {
-            dependency 'org.modelmapper:modelmapper:3.1.0'
+            dependency "org.modelmapper:modelmapper:3.1.0"
         }
     }
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok'
-        testCompileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-        testImplementation('org.springframework.boot:spring-boot-starter-test') {
-            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        compileOnly "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude group: "org.junit.vintage", module: "junit-vintage-engine"
         }
-        implementation 'org.apache.commons:commons-lang3:3.8.1'
+        implementation "org.apache.commons:commons-lang3"
     }
 
     configurations {
@@ -72,23 +71,23 @@ subprojects {
 
 }
 
-project(':server-api') {
+project(":server-api") {
     dependencies {
-        implementation project(':server-common')
-        implementation project(':server-data')
-        implementation project(':server-config')
+        implementation project(":server-common")
+        implementation project(":server-data")
+        implementation project(":server-config")
     }
 }
 
-project(':server-data') {
+project(":server-data") {
     dependencies {
-        implementation project(':server-common')
+        implementation project(":server-common")
     }
 }
 
-project(':server-batch') {
+project(":server-batch") {
     dependencies {
-        implementation project(':server-common')
-        implementation project(':server-data')
+        implementation project(":server-common")
+        implementation project(":server-data")
     }
 }

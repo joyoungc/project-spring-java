@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Import;
 @DataJpaTest(showSql = false)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import({DataSourceConfig.class, JpaDataConfig.class})
-public abstract class BaseDataJpaTest {
+public abstract class BaseJpaRepositoryTest {
 }
