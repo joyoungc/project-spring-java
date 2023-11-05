@@ -24,6 +24,7 @@ class MemberRepositoryTest extends BaseJpaRepositoryTest {
     void find_by_id() {
         // given
         Member save = memberRepository.save(new Member("MyName", Grade.VIP));
+        entityManager.clear(); // Clear persistence context
 
         // when
         Optional<Member> member = memberRepository.findById(save.getId());
