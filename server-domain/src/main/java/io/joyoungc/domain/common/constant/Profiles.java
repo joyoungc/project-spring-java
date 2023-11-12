@@ -1,4 +1,4 @@
-package io.joyoungc.domain.constant;
+package io.joyoungc.domain.common.constant;
 
 public final class Profiles {
 

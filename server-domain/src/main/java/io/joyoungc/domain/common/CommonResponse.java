@@ -1,6 +1,6 @@
 package io.joyoungc.domain.common;
 
-import io.joyoungc.domain.constant.ResponseCode;
+import io.joyoungc.domain.common.constant.ResponseCode;
 
 /***
  * Created by Aiden Jeong on 2021.12.13

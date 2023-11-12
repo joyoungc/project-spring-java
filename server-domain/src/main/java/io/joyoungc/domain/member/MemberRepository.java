@@ -3,7 +3,7 @@ package io.joyoungc.domain.member;
 import java.util.List;
 
 /**
- * Port
+ * Persistence Port
  */
 public interface MemberRepository {
 
