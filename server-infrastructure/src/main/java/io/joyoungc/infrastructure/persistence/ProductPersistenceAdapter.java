@@ -1,12 +1,12 @@
-package io.joyoungc.api.infrastructure.persistence;
+package io.joyoungc.infrastructure.persistence;
 
-import io.joyoungc.api.application.mapper.ProductMapper;
-import io.joyoungc.api.infrastructure.repository.ProductJpaRepository;
 import io.joyoungc.data.jpa.domain.ProductEntity;
+import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
-import io.joyoungc.domain.constant.CommonError;
 import io.joyoungc.domain.product.Product;
 import io.joyoungc.domain.product.ProductRepository;
+import io.joyoungc.infrastructure.persistence.mapper.ProductMapper;
+import io.joyoungc.infrastructure.persistence.repository.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

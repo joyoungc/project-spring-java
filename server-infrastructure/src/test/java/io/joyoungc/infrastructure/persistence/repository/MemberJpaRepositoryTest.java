@@ -1,8 +1,9 @@
-package io.joyoungc.api.infrastructure.repository;
+package io.joyoungc.infrastructure.persistence.repository;
 
-import io.joyoungc.api.infrastructure.BaseJpaRepositoryTest;
 import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.domain.member.Grade;
+import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +30,7 @@ class MemberJpaRepositoryTest extends BaseJpaRepositoryTest {
         Optional<MemberEntity> member = memberRepository.findById(save.getId());
 
         // then
-        assertThat(member).isNotEmpty();
+        Assertions.assertThat(member).isNotEmpty();
         assertThat(member.get().getName()).isEqualTo("MyName");
     }
 
@@ -42,7 +43,7 @@ class MemberJpaRepositoryTest extends BaseJpaRepositoryTest {
         List<MemberEntity> members = memberRepository.findMembers(Grade.VIP);
 
         // then
-        assertThat(members).isNotEmpty();
+        Assertions.assertThat(members).isNotEmpty();
     }
 
     @Test
@@ -73,7 +74,7 @@ class MemberJpaRepositoryTest extends BaseJpaRepositoryTest {
 
         // then
         Optional<MemberEntity> optionalMember = memberRepository.findById(id);
-        assertThat(optionalMember).isEmpty();
+        Assertions.assertThat(optionalMember).isEmpty();
     }
 
 }

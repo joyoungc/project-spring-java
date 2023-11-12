@@ -1,13 +1,13 @@
-package io.joyoungc.api.infrastructure.persistence;
+package io.joyoungc.infrastructure.persistence;
 
-import io.joyoungc.api.application.mapper.MemberMapper;
-import io.joyoungc.api.infrastructure.repository.MemberJpaRepository;
 import io.joyoungc.data.jpa.domain.MemberEntity;
+import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
-import io.joyoungc.domain.constant.CommonError;
 import io.joyoungc.domain.member.Grade;
 import io.joyoungc.domain.member.Member;
 import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.infrastructure.persistence.mapper.MemberMapper;
+import io.joyoungc.infrastructure.persistence.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

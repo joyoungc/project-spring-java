@@ -1,4 +1,4 @@
-package io.joyoungc.api.infrastructure;
+package io.joyoungc.infrastructure.persistence;
 
 import io.joyoungc.data.configuration.DataSourceConfig;
 import io.joyoungc.data.configuration.JpaDataConfig;

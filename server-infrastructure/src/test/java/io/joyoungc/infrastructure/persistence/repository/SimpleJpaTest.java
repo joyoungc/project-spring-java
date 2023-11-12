@@ -1,12 +1,13 @@
-package io.joyoungc.api.infrastructure.repository;
+package io.joyoungc.infrastructure.persistence.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.joyoungc.api.infrastructure.BaseJpaRepositoryTest;
 import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.data.jpa.domain.OrderEntity;
+import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
-import io.joyoungc.domain.constant.CommonError;
+import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ class SimpleJpaTest extends BaseJpaRepositoryTest {
         em.clear();
 
         List<MemberEntity> all = memberRepository.findAll();
-        assertThat(all).isNotNull();
+        Assertions.assertThat(all).isNotNull();
         assertThat(all.get(0).getOrders()).isNotEmpty();
         assertThat(all.get(1).getOrders()).isNotEmpty();
         assertThat(all.get(2).getOrders()).isEmpty();
@@ -119,7 +120,7 @@ class SimpleJpaTest extends BaseJpaRepositoryTest {
             System.out.println("tuple = " + tuple);
         }
 
-        assertThat(tuples).isNotEmpty();
+        Assertions.assertThat(tuples).isNotEmpty();
     }
 
 
@@ -134,7 +135,7 @@ class SimpleJpaTest extends BaseJpaRepositoryTest {
                 .where(memberEntity.name.eq("테스트1")).fetchOne();
 
         List<OrderEntity> orders = result.getOrders();
-        assertThat(orders).isEmpty();
+        Assertions.assertThat(orders).isEmpty();
     }
 
     @Test
