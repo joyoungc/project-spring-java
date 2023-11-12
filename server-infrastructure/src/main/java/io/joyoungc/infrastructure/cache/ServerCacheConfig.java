@@ -1,5 +1,8 @@
-package io.joyoungc.config.cache;
+package io.joyoungc.infrastructure.cache;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +17,8 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * Created by Aiden Jeong on 2021.11.14
@@ -57,5 +62,30 @@ public class ServerCacheConfig {
                 .entryTtl(Duration.ofMinutes(1));
         return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory)
                 .cacheDefaults(redisConfiguration).build();
+    }
+
+    @Value("${spring.profiles.active:default}")
+    private String activeProfile;
+
+    /**
+     * Redis 설정
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnProperty(name = "server-api.redis.enabled", havingValue = "true")
+    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
+        return builder -> {
+            Map<String, RedisCacheConfiguration> caches = new HashMap<>();
+            for (CacheCodes.Cache cache : CacheCodes.Cache.values()) {
+                caches.put(cache.getName(), RedisCacheConfiguration.defaultCacheConfig()
+                        .disableCachingNullValues()
+                        .prefixCacheNameWith(activeProfile + "::")
+                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                        .entryTtl(cache.getTtl())
+                );
+            }
+            builder.withInitialCacheConfigurations(caches);
+        };
     }
 }

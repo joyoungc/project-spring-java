@@ -1,4 +1,4 @@
-package io.joyoungc.api.common.client;
+package io.joyoungc.infrastructure.client;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;

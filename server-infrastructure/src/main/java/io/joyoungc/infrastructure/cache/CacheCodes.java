@@ -1,14 +1,10 @@
-package io.joyoungc.api;
+package io.joyoungc.infrastructure.cache;
 
 import lombok.Getter;
 
 import java.time.Duration;
 
-/***
- * Created by Aiden Jeong on 2021.11.15
- */
-public class ApiCodes {
-
+public class CacheCodes {
     private static final Duration DURATION_12_HOURS = Duration.ofHours(12);
     private static final Duration DURATION_5_MINUTES = Duration.ofMinutes(5);
     private static final Duration DURATION_10_MINUTES = Duration.ofMinutes(10);
