@@ -1,6 +1,7 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.data.jpa.domain;
 
-import lombok.AccessLevel;
+import io.joyoungc.domain.member.Address;
+import io.joyoungc.domain.member.Grade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,10 +14,11 @@ import java.util.List;
  * Created by Aiden Jeong on 2021.12.12
  */
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "member")
+@NoArgsConstructor
 @Getter
 @Setter
-public class Member extends AuditEntity {
+public class MemberEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +34,13 @@ public class Member extends AuditEntity {
     private Address address;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Order> orders = new ArrayList<>();
+    private List<OrderEntity> orders = new ArrayList<>();
 
-    public Member(String name) {
+    public MemberEntity(String name) {
         this.name = name;
     }
 
-    public Member(String name, Grade grade) {
+    public MemberEntity(String name, Grade grade) {
         this.name = name;
         this.grade = grade;
     }

@@ -1,6 +1,9 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.data.jpa.domain;
 
-import lombok.*;
+import io.joyoungc.domain.order.OrderStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,11 +13,10 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "orders")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString
-public class Order extends AuditEntity {
+public class OrderEntity extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +25,17 @@ public class Order extends AuditEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private MemberEntity member;
 
     @OneToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private ProductEntity product;
 
     private Long discountPrice;
 
     // orderItems 1:1
 
-    public Order(Member member, Product product, Long discountPrice, LocalDateTime orderDate) {
+    public OrderEntity(MemberEntity member, ProductEntity product, Long discountPrice, LocalDateTime orderDate) {
         this.member = member;
         this.product = product;
         this.discountPrice = discountPrice;

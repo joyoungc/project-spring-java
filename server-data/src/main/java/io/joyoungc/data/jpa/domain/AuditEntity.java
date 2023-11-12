@@ -1,6 +1,7 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.data.jpa.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  * Created by Aiden Jeong on 2021.09.22
  */
 @Getter
+@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditEntity {
