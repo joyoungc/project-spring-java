@@ -1,6 +1,7 @@
-package io.joyoungc.common.exception;
+package io.joyoungc.domain.common.exception;
 
-import io.joyoungc.common.ErrorCode;
+
+import io.joyoungc.domain.constant.ErrorCode;
 
 /***
  * Created by Aiden Jeong on 2022.02.24

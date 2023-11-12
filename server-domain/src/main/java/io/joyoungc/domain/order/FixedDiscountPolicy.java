@@ -1,8 +1,9 @@
-package io.joyoungc.api.order.service;
+package io.joyoungc.domain.order;
 
-import io.joyoungc.data.shop.domain.Grade;
-import io.joyoungc.data.shop.domain.Member;
-import io.joyoungc.data.shop.domain.Product;
+
+import io.joyoungc.domain.member.Grade;
+import io.joyoungc.domain.member.Member;
+import io.joyoungc.domain.product.Product;
 import org.springframework.stereotype.Component;
 
 /***

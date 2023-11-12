@@ -1,4 +1,4 @@
-package io.joyoungc.common;
+package io.joyoungc.domain.constant;
 
 /***
  * Created by Aiden Jeong on 2022.02.24

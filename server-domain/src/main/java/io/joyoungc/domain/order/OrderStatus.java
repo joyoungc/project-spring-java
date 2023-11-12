@@ -1,4 +1,4 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.domain.order;
 
 /***
  * Created by Aiden Jeong on 2021.12.13

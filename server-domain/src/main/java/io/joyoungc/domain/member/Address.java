@@ -1,13 +1,10 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.domain.member;
 
 import lombok.Getter;
-
-import javax.persistence.Embeddable;
 
 /***
  * Created by Aiden Jeong on 2021.12.13
  */
-@Embeddable
 @Getter
 public class Address {
 

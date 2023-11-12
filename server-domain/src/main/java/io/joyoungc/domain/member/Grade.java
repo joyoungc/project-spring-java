@@ -1,4 +1,4 @@
-package io.joyoungc.data.shop.domain;
+package io.joyoungc.domain.member;
 
 /***
  * Created by Aiden Jeong on 2022.02.24

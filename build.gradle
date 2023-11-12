@@ -34,10 +34,12 @@ subprojects {
     }
 
     dependencies {
-        compileOnly "org.projectlombok:lombok"
-        testCompileOnly "org.projectlombok:lombok"
-        annotationProcessor "org.projectlombok:lombok"
+        implementation 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
         testAnnotationProcessor "org.projectlombok:lombok"
+//        compileOnly "org.projectlombok:lombok"
+//        testCompileOnly "org.projectlombok:lombok"
+//        annotationProcessor "org.projectlombok:lombok"
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude group: "org.junit.vintage", module: "junit-vintage-engine"
         }
@@ -71,23 +73,23 @@ subprojects {
 
 }
 
-project(":server-api") {
-    dependencies {
-        implementation project(":server-common")
-        implementation project(":server-data")
-        implementation project(":server-config")
-    }
-}
+//project(":server-api") {
+//    dependencies {
+//        implementation project(":server-common")
+//        implementation project(":server-data")
+//        implementation project(":server-config")
+//    }
+//}
 
-project(":server-data") {
-    dependencies {
-        implementation project(":server-common")
-    }
-}
+//project(":server-data") {
+//    dependencies {
+//        implementation project(":server-common")
+//    }
+//}
 
 project(":server-batch") {
     dependencies {
-        implementation project(":server-common")
+        implementation project(":server-domain")
         implementation project(":server-data")
     }
 }

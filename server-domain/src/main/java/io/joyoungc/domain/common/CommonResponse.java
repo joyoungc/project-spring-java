@@ -1,4 +1,6 @@
-package io.joyoungc.common;
+package io.joyoungc.domain.common;
+
+import io.joyoungc.domain.constant.ResponseCode;
 
 /***
  * Created by Aiden Jeong on 2021.12.13

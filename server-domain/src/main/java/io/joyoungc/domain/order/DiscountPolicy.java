@@ -1,7 +1,8 @@
-package io.joyoungc.api.order.service;
+package io.joyoungc.domain.order;
 
-import io.joyoungc.data.shop.domain.Member;
-import io.joyoungc.data.shop.domain.Product;
+
+import io.joyoungc.domain.member.Member;
+import io.joyoungc.domain.product.Product;
 
 /***
  * Created by Aiden Jeong on 2022.02.24
