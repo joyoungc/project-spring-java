@@ -41,11 +41,4 @@ public class MemberService {
         return MemberMapper.INSTANCE.toMemberResponseList(all);
     }
 
-//    @Cacheable(value = CACHE_USER_LIST, cacheManager = ServerCacheConfig.CACHE_JDK_MANAGER)
-//    @Transactional(readOnly = true)
-//    public OrderCacheResponse getUserByJdkCache(long userId) {
-//        User user = memberRepository.getById(userId);
-//        return modelMapper.map(user, OrderCacheResponse.class);
-//    }
-
 }

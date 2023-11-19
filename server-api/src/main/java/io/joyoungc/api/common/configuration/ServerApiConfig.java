@@ -1,5 +1,8 @@
 package io.joyoungc.api.common.configuration;
 
+import io.joyoungc.domain.order.DiscountPolicy;
+import io.joyoungc.domain.order.FixedDiscountPolicy;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -7,5 +10,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ServerApiConfig {
+
+    @Bean
+    public DiscountPolicy discountPolicy() {
+        return new FixedDiscountPolicy();
+    }
 
 }
