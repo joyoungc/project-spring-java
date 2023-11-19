@@ -1,11 +1,11 @@
 package io.joyoungc.infrastructure.persistence;
 
 
-import io.joyoungc.data.jpa.domain.OrderEntity;
 import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.domain.order.Order;
 import io.joyoungc.domain.order.OrderRepository;
+import io.joyoungc.infrastructure.persistence.entity.OrderEntity;
 import io.joyoungc.infrastructure.persistence.mapper.OrderMapper;
 import io.joyoungc.infrastructure.persistence.repository.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;

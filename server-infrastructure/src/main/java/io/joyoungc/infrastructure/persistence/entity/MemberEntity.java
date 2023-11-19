@@ -1,4 +1,4 @@
-package io.joyoungc.data.jpa.domain;
+package io.joyoungc.infrastructure.persistence.entity;
 
 import io.joyoungc.domain.member.Address;
 import io.joyoungc.domain.member.Grade;

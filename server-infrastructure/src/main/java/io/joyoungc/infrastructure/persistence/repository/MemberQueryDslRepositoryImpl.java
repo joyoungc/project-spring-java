@@ -2,13 +2,13 @@ package io.joyoungc.infrastructure.persistence.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.domain.member.Grade;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static io.joyoungc.data.jpa.domain.QMemberEntity.memberEntity;
+import static io.joyoungc.infrastructure.persistence.entity.QMemberEntity.memberEntity;
 
 
 /***

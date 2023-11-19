@@ -1,8 +1,8 @@
 package io.joyoungc.infrastructure.persistence.mapper;
 
-import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.domain.member.Member;
 import io.joyoungc.domain.order.Order;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

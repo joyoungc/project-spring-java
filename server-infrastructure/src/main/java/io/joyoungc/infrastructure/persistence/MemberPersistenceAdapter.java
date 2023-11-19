@@ -1,11 +1,11 @@
 package io.joyoungc.infrastructure.persistence;
 
-import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.domain.member.Grade;
 import io.joyoungc.domain.member.Member;
 import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import io.joyoungc.infrastructure.persistence.mapper.MemberMapper;
 import io.joyoungc.infrastructure.persistence.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;

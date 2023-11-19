@@ -1,4 +1,4 @@
-package io.joyoungc.data.configuration;
+package io.joyoungc.infrastructure.persistence.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;

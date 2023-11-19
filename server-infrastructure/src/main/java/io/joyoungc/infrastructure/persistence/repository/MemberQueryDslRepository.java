@@ -1,7 +1,7 @@
 package io.joyoungc.infrastructure.persistence.repository;
 
-import io.joyoungc.data.jpa.domain.MemberEntity;
 import io.joyoungc.domain.member.Grade;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 
 import java.util.List;
 

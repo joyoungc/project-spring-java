@@ -1,4 +1,4 @@
-package io.joyoungc.data.mongo;
+package io.joyoungc.infrastructure.mongo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

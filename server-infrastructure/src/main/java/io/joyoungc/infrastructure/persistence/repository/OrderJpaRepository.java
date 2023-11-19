@@ -1,6 +1,6 @@
 package io.joyoungc.infrastructure.persistence.repository;
 
-import io.joyoungc.data.jpa.domain.OrderEntity;
+import io.joyoungc.infrastructure.persistence.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /***

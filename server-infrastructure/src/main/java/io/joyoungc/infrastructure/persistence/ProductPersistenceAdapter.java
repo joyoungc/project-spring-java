@@ -1,10 +1,10 @@
 package io.joyoungc.infrastructure.persistence;
 
-import io.joyoungc.data.jpa.domain.ProductEntity;
 import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.domain.product.Product;
 import io.joyoungc.domain.product.ProductRepository;
+import io.joyoungc.infrastructure.persistence.entity.ProductEntity;
 import io.joyoungc.infrastructure.persistence.mapper.ProductMapper;
 import io.joyoungc.infrastructure.persistence.repository.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package io.joyoungc.infrastructure.persistence.repository;
 
-import io.joyoungc.data.jpa.domain.MemberEntity;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /***

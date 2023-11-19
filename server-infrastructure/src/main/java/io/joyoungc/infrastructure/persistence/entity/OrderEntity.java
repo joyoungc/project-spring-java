@@ -1,4 +1,4 @@
-package io.joyoungc.data.jpa.domain;
+package io.joyoungc.infrastructure.persistence.entity;
 
 import io.joyoungc.domain.order.OrderStatus;
 import lombok.Getter;

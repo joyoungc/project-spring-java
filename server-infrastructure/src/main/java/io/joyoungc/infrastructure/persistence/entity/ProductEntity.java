@@ -1,4 +1,4 @@
-package io.joyoungc.data.jpa.domain;
+package io.joyoungc.infrastructure.persistence.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

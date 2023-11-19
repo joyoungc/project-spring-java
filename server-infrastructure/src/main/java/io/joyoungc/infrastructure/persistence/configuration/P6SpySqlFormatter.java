@@ -1,4 +1,4 @@
-package io.joyoungc.data.configuration;
+package io.joyoungc.infrastructure.persistence.configuration;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
