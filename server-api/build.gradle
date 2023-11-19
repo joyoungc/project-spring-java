@@ -24,6 +24,9 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
+
+    testImplementation(testFixtures(project(":server-infrastructure")))
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.1")

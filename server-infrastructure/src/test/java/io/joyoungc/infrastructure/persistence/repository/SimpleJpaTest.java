@@ -2,11 +2,11 @@ package io.joyoungc.infrastructure.persistence.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.joyoungc.data.jpa.domain.MemberEntity;
-import io.joyoungc.data.jpa.domain.OrderEntity;
 import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
+import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
+import io.joyoungc.infrastructure.persistence.entity.OrderEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static io.joyoungc.data.jpa.domain.QMemberEntity.memberEntity;
-import static io.joyoungc.data.jpa.domain.QOrderEntity.orderEntity;
+import static io.joyoungc.infrastructure.persistence.entity.QMemberEntity.memberEntity;
+import static io.joyoungc.infrastructure.persistence.entity.QOrderEntity.orderEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /***
