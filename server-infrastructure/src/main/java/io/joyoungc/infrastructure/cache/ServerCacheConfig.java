@@ -1,5 +1,6 @@
 package io.joyoungc.infrastructure.cache;
 
+import io.joyoungc.infrastructure.constant.Profiles;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -25,7 +26,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableCaching
-@Profile("redis")
+@Profile(Profiles.REDIS)
 public class ServerCacheConfig {
 
     public static final String CACHE_JDK_MANAGER = "redisCacheJdkManager";
