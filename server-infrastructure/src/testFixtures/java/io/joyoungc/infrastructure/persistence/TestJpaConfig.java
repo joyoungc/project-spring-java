@@ -1,4 +1,4 @@
-package io.joyoungc.api;
+package io.joyoungc.infrastructure.persistence;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
