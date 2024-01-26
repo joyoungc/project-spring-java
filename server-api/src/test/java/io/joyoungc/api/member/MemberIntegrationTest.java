@@ -1,20 +1,18 @@
 package io.joyoungc.api.member;
 
-import io.joyoungc.api.TestJpaConfig;
-import io.joyoungc.api.member.dto.MemberDto;
-import io.joyoungc.api.member.service.MemberService;
+import io.joyoungc.api.member.request.CreateMemberRequest;
+import io.joyoungc.api.member.request.SearchMemberRequest;
+import io.joyoungc.api.member.response.MemberResponse;
+import io.joyoungc.infrastructure.persistence.TestJpaConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ class MemberIntegrationTest {
         given().log().all()
                 .contentType(ContentType.JSON)
                 .body(
-                        new MemberDto.RequestUser("이름", "createId")
+                        new CreateMemberRequest("이름", "createId")
                 )
                 .when().post(url)
                 .then().log().body()
@@ -64,7 +62,7 @@ class MemberIntegrationTest {
                 .statusCode(200)
                 .extract().response();
 
-        List<MemberDto.ResponseUser> list = response.jsonPath().getList(".", MemberDto.ResponseUser.class);
+        List<MemberResponse> list = response.jsonPath().getList(".", MemberResponse.class);
 
         assertThat(list).isNotEmpty().element(0).satisfies(
                 c -> {
@@ -92,7 +90,7 @@ class MemberIntegrationTest {
                         .statusCode(200)
                         .extract().response();
 
-        MemberDto.ResponseUser object = response.jsonPath().getObject(".", MemberDto.ResponseUser.class);
+        MemberResponse object = response.jsonPath().getObject(".", MemberResponse.class);
 
         assertThat(object).isNotNull().satisfies(
                 c -> {
@@ -114,16 +112,16 @@ class MemberIntegrationTest {
     @Disabled
     void get_cached_members() {
         // 테스트 사용자 등록
-        MemberDto.RequestUser requestUser = new MemberDto.RequestUser("테스트", "생성자");
+        CreateMemberRequest requestUser = new CreateMemberRequest("테스트", "생성자");
         Long userId = memberService.createMember(requestUser);
 
-        MemberDto.Search search = new MemberDto.Search();
+        SearchMemberRequest search = new SearchMemberRequest();
         // redis json
-        List<MemberDto.ResponseUser> users = memberService.getMembers(search);
+        List<MemberResponse> users = memberService.getMembers(search);
         assertThat(users).isNotEmpty();
 
         // 한번 더 조회시 캐시 여부 확인
-        List<MemberDto.ResponseUser> users1 = memberService.getMembers(search);
+        List<MemberResponse> users1 = memberService.getMembers(search);
         assertThat(users1).isNotEmpty();
     }
 

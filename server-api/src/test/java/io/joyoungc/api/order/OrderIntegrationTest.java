@@ -1,22 +1,20 @@
 package io.joyoungc.api.order;
 
-import io.joyoungc.api.TestJpaConfig;
-import io.joyoungc.api.member.service.MemberService;
-import io.joyoungc.api.order.dto.OrderDto;
-import io.joyoungc.data.shop.domain.Grade;
-import io.joyoungc.data.shop.domain.Member;
-import io.joyoungc.data.shop.domain.OrderStatus;
-import io.joyoungc.data.shop.domain.Product;
-import io.joyoungc.data.shop.repository.MemberRepository;
-import io.joyoungc.data.shop.repository.ProductRepository;
+import io.joyoungc.api.order.request.CreateOrderRequest;
+import io.joyoungc.api.order.response.OrderResponse;
+import io.joyoungc.domain.member.Grade;
+import io.joyoungc.domain.member.Member;
+import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.domain.order.OrderStatus;
+import io.joyoungc.domain.product.Product;
+import io.joyoungc.domain.product.ProductRepository;
+import io.joyoungc.infrastructure.persistence.TestJpaConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
@@ -47,10 +45,11 @@ class OrderIntegrationTest {
 
     // @BeforeEach
     private void init() {
-        Member member = memberRepository.save(new Member("이름", Grade.VIP));
-        memberId = member.getId();
-        Product product = productRepository.save(new Product("상품", 10000L));
-        productId = product.getId();
+        Member member = new Member();
+        member.setName("이름");
+        member.setGrade(Grade.VIP);
+        memberId = memberRepository.save(member);
+        productId = productRepository.save(new Product("상품", 10000L));
     }
 
     @Test
@@ -58,7 +57,7 @@ class OrderIntegrationTest {
     void create_order() {
         init();
         String url = createUrlWithPort(API_ENDPOINT, port);
-        OrderDto.RequestCreate create = new OrderDto.RequestCreate();
+        CreateOrderRequest create = new CreateOrderRequest();
         create.setMemberId(memberId);
         create.setProductId(productId);
         create.setStatus(OrderStatus.ORDER);
@@ -86,7 +85,7 @@ class OrderIntegrationTest {
                 .statusCode(200)
                 .extract().response();
 
-        List<OrderDto.ResponseOrder> list = response.jsonPath().getList(".", OrderDto.ResponseOrder.class);
+        List<OrderResponse> list = response.jsonPath().getList(".", OrderResponse.class);
 
         assertThat(list).isNotEmpty().element(0).satisfies(
                 c -> {

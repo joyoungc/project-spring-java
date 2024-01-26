@@ -1,5 +1,0 @@
-# Common application config file that all applications reference
-spring:
-  output:
-    ansi:
-      enabled: always
