@@ -2,11 +2,11 @@ package io.joyoungc.infrastructure.persistence.entity;
 
 import io.joyoungc.domain.member.Address;
 import io.joyoungc.domain.member.Grade;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

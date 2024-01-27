@@ -1,11 +1,11 @@
 package io.joyoungc.infrastructure.persistence.entity;
 
 import io.joyoungc.domain.order.OrderStatus;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /***

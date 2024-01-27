@@ -1,10 +1,9 @@
 package io.joyoungc.infrastructure.persistence.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 /***
  * Created by Aiden Jeong on 2022.02.24

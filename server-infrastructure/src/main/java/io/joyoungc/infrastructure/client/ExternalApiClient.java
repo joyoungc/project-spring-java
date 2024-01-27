@@ -1,12 +1,11 @@
 package io.joyoungc.infrastructure.client;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
-
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class ExternalApiClient implements HttpApiClient {

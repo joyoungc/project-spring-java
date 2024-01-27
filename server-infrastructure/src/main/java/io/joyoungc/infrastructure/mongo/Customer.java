@@ -1,11 +1,10 @@
 package io.joyoungc.infrastructure.mongo;
 
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.Id;
 
 /***
  * Created by Aiden Jeong on 2021.12.12
