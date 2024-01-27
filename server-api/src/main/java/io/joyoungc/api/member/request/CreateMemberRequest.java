@@ -1,11 +1,10 @@
 package io.joyoungc.api.member.request;
 
 import io.joyoungc.domain.member.Grade;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter

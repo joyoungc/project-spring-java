@@ -3,11 +3,11 @@ package io.joyoungc.infrastructure.persistence.repository;
 import io.joyoungc.domain.member.Grade;
 import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
 import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 

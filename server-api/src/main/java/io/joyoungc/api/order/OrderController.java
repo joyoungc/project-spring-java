@@ -3,11 +3,11 @@ package io.joyoungc.api.order;
 import io.joyoungc.api.order.request.CreateOrderRequest;
 import io.joyoungc.api.order.request.UpdateOrderRequest;
 import io.joyoungc.api.order.response.OrderResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /***

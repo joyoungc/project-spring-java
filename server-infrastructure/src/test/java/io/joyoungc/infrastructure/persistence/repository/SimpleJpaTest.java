@@ -7,13 +7,13 @@ import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
 import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import io.joyoungc.infrastructure.persistence.entity.OrderEntity;
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 

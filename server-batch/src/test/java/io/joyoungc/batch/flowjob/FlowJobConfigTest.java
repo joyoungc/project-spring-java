@@ -1,22 +1,20 @@
 package io.joyoungc.batch.flowjob;
 
-import io.joyoungc.batch.TestBatchConfig;
+import io.joyoungc.batch.ServerBatchIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;
 import org.springframework.batch.test.JobLauncherTestUtils;
-import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@SpringBatchTest
-@SpringBootTest(classes = {FlowJobConfig.class, TestBatchConfig.class})
-class FlowJobConfigTest {
+@SpringJUnitConfig(FlowJobConfig.class)
+class FlowJobConfigTest extends ServerBatchIntegrationTest {
 
     @Autowired
-    private JobLauncherTestUtils jobLauncherTestUtils;
+    JobLauncherTestUtils jobLauncherTestUtils;
 
     @Test
     void execute_FlowJob_with_JobStop_is_false() throws Exception {

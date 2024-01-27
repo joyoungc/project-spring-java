@@ -7,39 +7,41 @@ import io.joyoungc.batch.example.tasklet.JobChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @RequiredArgsConstructor
 public class FlowJobConfig {
 
-    private final JobBuilderFactory jobBuilderFactory;
-    private final StepBuilderFactory stepBuilderFactory;
-
     @Bean
-    public Job flowJob() {
-        return jobBuilderFactory.get("flowJob")
-                .start(flowStep1())
+    public Job flowJob(JobRepository jobRepository,
+                       @Qualifier("flowStep1") Step flowStep1,
+                       @Qualifier("flowStep2") Step flowStep2) {
+        return new JobBuilder("flowJob", jobRepository)
+                .start(flowStep1)
                 .on("FAILED").stop()
-                .from(flowStep1()).on("*").to(flowStep2())
+                .from(flowStep1).on("*").to(flowStep2)
                 .end()
                 .build();
     }
 
     @Bean
-    public Step flowStep1() {
-        return stepBuilderFactory.get("flowStep1")
-                .tasklet(new JobChecker())
+    public Step flowStep1(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("flowStep1", jobRepository)
+                .tasklet(new JobChecker(), transactionManager)
                 .build();
     }
 
     @Bean
-    public Step flowStep2() {
-        return stepBuilderFactory.get("flowStep2")
-                .<String,String>chunk(5)
+    public Step flowStep2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("flowStep2", jobRepository)
+                .<String, String>chunk(5, transactionManager)
                 .reader(new ExampleItemReader())
                 .writer(new ExampleItemWriter())
                 .build();
