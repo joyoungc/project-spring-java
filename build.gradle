@@ -1,23 +1,26 @@
 buildscript {
-    ext {
-        springBootVersion = '2.6.7'
+    dependencies {
+//        classpath 'org.yaml:snakeyaml:1.33'
     }
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
 }
 
 allprojects {
     group = 'io.joyoungc'
-
-
     version = '0.0.1-SNAPSHOT'
 }
 
 subprojects {
+    group = 'io.joyoungc'
+    version = '0.0.1-SNAPSHOT'
+
     apply plugin: 'java-library'
     apply plugin: 'java-test-fixtures'
     apply plugin: 'org.springframework.boot'
@@ -31,28 +34,17 @@ subprojects {
     }
 
     dependencyManagement {
-//        dependencies {
-//            dependency "org.modelmapper:modelmapper:3.1.0"
-//        }
     }
 
     dependencies {
+        // lombok
         implementation 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testAnnotationProcessor "org.projectlombok:lombok"
-//        compileOnly "org.projectlombok:lombok"
-//        testCompileOnly "org.projectlombok:lombok"
-//        annotationProcessor "org.projectlombok:lombok"
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-        }
-        implementation "org.apache.commons:commons-lang3"
-    }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
+        // commons
+        implementation 'org.apache.commons:commons-lang3'
+        implementation 'org.apache.commons:commons-collections4:4.4'
     }
 
     test {
