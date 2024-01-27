@@ -6,19 +6,20 @@ import io.joyoungc.batch.simplejob.item.SimpleJobParameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @RequiredArgsConstructor
 public class SimpleJobConfig {
 
-    private final JobBuilderFactory jobFactory;
-    private final StepBuilderFactory stepFactory;
     private final SimpleJobParameter jobParameter;
     private static final String JOB_NAME = "simple";
 
@@ -29,11 +30,12 @@ public class SimpleJobConfig {
     }
 
     @Bean(name = JOB_NAME + "Job")
-    public Job simpleJob() {
-        return jobFactory.get(JOB_NAME + "Job")
+    public Job simpleJob(JobRepository jobRepository, @Qualifier("simpleStep1") Step simpleStep1) {
+        return new JobBuilder(JOB_NAME + "Job", jobRepository)
                 .preventRestart()
-                .start(simpleStep1())
+                .start(simpleStep1)
                 .build();
+
     }
 
 //    @Bean(name = "exampleJob")
@@ -58,8 +60,9 @@ public class SimpleJobConfig {
 
     @Bean
     @JobScope
-    public Step simpleStep1() {
-        return stepFactory.get(JOB_NAME + "Step1").<String,String>chunk(5)
+    public Step simpleStep1(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder(JOB_NAME + "Step1", jobRepository)
+                .<String, String>chunk(5, transactionManager)
                 .reader(exampleItemReader())
                 .processor(exampleItemProcessor())
                 .writer(exampleItemWriter())
@@ -88,8 +91,9 @@ public class SimpleJobConfig {
 
     @Bean
     @JobScope
-    public Step exampleStep2() {
-        return stepFactory.get("exampleStep2").<String,String>chunk(3)
+    public Step exampleStep2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("exampleStep2", jobRepository)
+                .<String, String>chunk(3, transactionManager)
                 .reader(new ExampleStep2ItemReader())
                 .writer(new ExampleStep2ItemWriter())
                 .allowStartIfComplete(true)
@@ -98,13 +102,15 @@ public class SimpleJobConfig {
 
     @Bean
     @JobScope
-    public Step exampleStep3() {
-        return stepFactory.get("exampleStep3").<String,String>chunk(3)
+    public Step exampleStep3(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("exampleStep3", jobRepository)
+                .<String, String>chunk(3, transactionManager)
                 .reader(exampleItemReader())
                 .processor(exampleItemProcessor())
                 .writer(exampleItemWriter())
                 .allowStartIfComplete(true)
                 .build();
+
     }
 
 }
