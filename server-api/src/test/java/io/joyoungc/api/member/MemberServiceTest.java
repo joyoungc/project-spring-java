@@ -1,24 +1,21 @@
 package io.joyoungc.api.member;
 
+import io.joyoungc.api.BaseServerApiIntegrationTest;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
 import io.joyoungc.domain.member.Grade;
-import io.joyoungc.infrastructure.persistence.TestJpaConfig;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Slf4j
-@RequiredArgsConstructor
-@TestJpaConfig
-class MemberServiceTest {
+class MemberServiceTest extends BaseServerApiIntegrationTest {
 
-    private final MemberService memberService;
+    @Autowired
+    MemberService memberService;
 
     @Test
     void create_member() {

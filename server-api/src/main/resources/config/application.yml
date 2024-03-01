@@ -1,23 +1,17 @@
 # Common application properties for server-api
 server:
-  port: 9010
+  port : 9010
   shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
 
-# 스프링 프레임워크 설정
 spring:
-  jpa:
-    open-in-view: false
-#    properties:
-#      hibernate.hbm2ddl.auto: none
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
-
-logging:
-  level:
-    jdbc:
-      sqlonly: info
-      sqltiming: off
-      audit: off
-      connection: off
-      resultsettable: info
-      resultset: off
+  profiles:
+    group:
+      default:
+        - infra-develop
+      test:
+        - infra-develop
+      release:
+        - infra-release

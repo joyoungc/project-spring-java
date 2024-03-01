@@ -1,17 +1,15 @@
 package io.joyoungc.api.member;
 
+import io.joyoungc.api.BaseServerApiIntegrationTest;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
-import io.joyoungc.infrastructure.persistence.TestJpaConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.List;
@@ -20,16 +18,13 @@ import static io.joyoungc.api.TestUtils.createUrlWithPort;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Slf4j
-@TestJpaConfig
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class MemberIntegrationTest {
+class MemberIntegrationTest extends BaseServerApiIntegrationTest {
 
     @LocalServerPort
     private int port;
 
     @Autowired
-    private MemberService memberService;
+    MemberService memberService;
 
     private static final String API_ENDPOINT = "/api/members";
 

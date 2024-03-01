@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    datasource-proxy:
+      logging: slf4j
+      query:
+        enable-logging: true
+        log-level: debug
+        logger-name:
+      slow-query:
+        enable-logging: true
+        log-level: warn
+        logger-name:
+      multiline: true
+      format-sql: false
+      json-format: false
+      count-query: false
+
+logging:
+  level:
+    root: debug
+    jdbc: trace
+#    org:
+#      springframework:
+#        jdbc:
+#          datasource: DEBUG
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE
+

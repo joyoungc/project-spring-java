@@ -1,0 +1,45 @@
+# 스프링 프레임워크 설정
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: app
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+  #    properties:
+  #      hibernate:
+  #        format_sql: true
+  #        hbm2ddl.auto: none
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+
+#logging:
+#  level:
+#    root: info
+#    jdbc:
+#      sqlonly: info
+#      sqltiming: off
+#      audit: off
+#      connection: off
+#      resultsettable: info
+#      resultset: off
+#    org:
+#      springframework:
+#        jdbc:
+#          datasource: DEBUG
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE
+
+decorator:
+  datasource:
+    p6spy:
+      multiline: true
