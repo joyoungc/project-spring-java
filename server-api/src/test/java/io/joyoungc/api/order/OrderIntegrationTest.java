@@ -1,21 +1,19 @@
 package io.joyoungc.api.order;
 
+import io.joyoungc.api.BaseServerApiIntegrationTest;
 import io.joyoungc.api.order.request.CreateOrderRequest;
 import io.joyoungc.api.order.response.OrderResponse;
 import io.joyoungc.domain.member.Grade;
 import io.joyoungc.domain.member.Member;
-import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.domain.member.MemberRepositoryPort;
 import io.joyoungc.domain.order.OrderStatus;
 import io.joyoungc.domain.product.Product;
-import io.joyoungc.domain.product.ProductRepository;
-import io.joyoungc.infrastructure.persistence.TestJpaConfig;
+import io.joyoungc.domain.product.ProductRepositoryPort;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.List;
@@ -27,16 +25,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 /***
  * Created by Aiden Jeong on 2022.04.03
  */
-@Slf4j
-@TestJpaConfig
-@RequiredArgsConstructor
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class OrderIntegrationTest {
+class OrderIntegrationTest extends BaseServerApiIntegrationTest {
 
     @LocalServerPort
     private int port;
-    private final MemberRepository memberRepository;
-    private final ProductRepository productRepository;
+
+    @Autowired
+    MemberRepositoryPort memberRepository;
+
+    @Autowired
+    ProductRepositoryPort productRepository;
 
     private static final String API_ENDPOINT = "/api/orders";
 

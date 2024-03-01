@@ -1,26 +1,19 @@
 package io.joyoungc.api.common.messages;
 
-import io.joyoungc.api.common.configuration.ServerApiWebConfig;
+import io.joyoungc.api.common.configuration.messages.JsonMessageSource;
 import io.joyoungc.api.common.configuration.messages.MessageLocale;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = ServerApiWebConfig.class)
 class JsonMessageSourceTest {
 
-    @Autowired
-    MessageSource messageSource;
+    MessageSource messageSource = new JsonMessageSource("i18n");
 
     @Test
     void get_message_by_locales() {

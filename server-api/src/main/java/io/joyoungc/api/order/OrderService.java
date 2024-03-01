@@ -4,12 +4,12 @@ import io.joyoungc.api.order.mapper.OrderMapper;
 import io.joyoungc.api.order.request.UpdateOrderRequest;
 import io.joyoungc.api.order.response.OrderResponse;
 import io.joyoungc.domain.member.Member;
-import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.domain.member.MemberRepositoryPort;
 import io.joyoungc.domain.order.DiscountPolicy;
 import io.joyoungc.domain.order.Order;
-import io.joyoungc.domain.order.OrderRepository;
+import io.joyoungc.domain.order.OrderRepositoryPort;
 import io.joyoungc.domain.product.Product;
-import io.joyoungc.domain.product.ProductRepository;
+import io.joyoungc.domain.product.ProductRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,14 +26,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final MemberRepository memberRepository;
-    private final ProductRepository productRepository;
+    private final MemberRepositoryPort memberRepositoryPort;
+    private final ProductRepositoryPort productRepository;
     private final DiscountPolicy discountPolicy;
-    private final OrderRepository orderRepository;
+    private final OrderRepositoryPort orderRepository;
 
     @Transactional
     public Long createOrder(Long memberId, Long productId) {
-        Member member = memberRepository.findById(memberId);
+        Member member = memberRepositoryPort.findById(memberId);
 
         Product product = productRepository.findById(productId);
 
@@ -60,7 +60,7 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public List<OrderResponse> getMemberOrders(Long memberId) {
-        Member member = memberRepository.findById(memberId);
+        Member member = memberRepositoryPort.findById(memberId);
         List<Order> orders = member.getOrders();
         List<OrderResponse> resultList = OrderMapper.INSTANCE.toOrderResponseList(orders);
         return resultList;

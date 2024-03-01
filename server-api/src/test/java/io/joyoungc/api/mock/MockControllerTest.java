@@ -2,10 +2,20 @@ package io.joyoungc.api.mock;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.joyoungc.api.BaseServerApiIntegrationTest;
+import io.joyoungc.infrastructure.configuration.PersistenceConfig;
+import io.joyoungc.infrastructure.constant.Profiles;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -22,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = MockController.class)
+@ActiveProfiles({Profiles.WEBMVC, Profiles.TEST})
 class MockControllerTest {
 
     @Autowired
@@ -47,7 +58,7 @@ class MockControllerTest {
                 .andExpect(jsonPath("$.localDateTime").exists())
                 .andReturn();
 
-        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
+        TypeReference<HashMap<String, String>> typeRef = new TypeReference<>() {};
         Map<String, String> resultMap = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), typeRef);
         String localDateTimeString = resultMap.get("localDateTime");
 

@@ -9,12 +9,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /***
  * Created by Aiden Jeong on 2021.09.22
  */
 @Configuration
-@EntityScan(basePackages = "io.joyoungc.infrastructure.persistence.entity")
+@EntityScan(basePackages = "io.joyoungc.infrastructure.persistence")
+@EnableJpaRepositories(basePackages = "io.joyoungc.infrastructure.persistence")
 @EnableJpaAuditing(modifyOnCreate = false)
 public class JpaDataConfig {
 

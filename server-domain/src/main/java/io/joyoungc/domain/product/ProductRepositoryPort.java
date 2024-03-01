@@ -1,6 +1,6 @@
 package io.joyoungc.domain.product;
 
-public interface ProductRepository {
+public interface ProductRepositoryPort {
 
     Product findById(Long productId);
 

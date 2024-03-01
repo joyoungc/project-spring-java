@@ -1,5 +1,0 @@
-server-api:
-  redis:
-    enabled: false
-  mongodb:
-    enabled: false

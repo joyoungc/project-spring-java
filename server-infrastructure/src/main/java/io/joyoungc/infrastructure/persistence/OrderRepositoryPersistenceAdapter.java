@@ -4,16 +4,16 @@ package io.joyoungc.infrastructure.persistence;
 import io.joyoungc.domain.common.constant.CommonError;
 import io.joyoungc.domain.common.exception.ApplicationException;
 import io.joyoungc.domain.order.Order;
-import io.joyoungc.domain.order.OrderRepository;
+import io.joyoungc.domain.order.OrderRepositoryPort;
+import io.joyoungc.infrastructure.persistence.configuration.PersistenceAdapter;
 import io.joyoungc.infrastructure.persistence.entity.OrderEntity;
 import io.joyoungc.infrastructure.persistence.mapper.OrderMapper;
 import io.joyoungc.infrastructure.persistence.repository.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
-@Repository
+@PersistenceAdapter
 @RequiredArgsConstructor
-public class OrderPersistenceAdapter implements OrderRepository {
+public class OrderRepositoryPersistenceAdapter implements OrderRepositoryPort {
 
     private final OrderJpaRepository orderJpaRepository;
 

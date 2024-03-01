@@ -1,17 +1,20 @@
 package io.joyoungc.api;
 
+import io.joyoungc.api.common.configuration.messages.MessageSourceConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringJUnitConfig(initializers = ConfigDataApplicationContextInitializer.class, classes = {MessageSourceConfig.class})
 class ServerApiApplicationTests {
 
     @Autowired
@@ -23,7 +26,7 @@ class ServerApiApplicationTests {
     @Test
     void test_properties() {
         Assertions.assertThat(env.getProperty("server.port")).isEqualTo("9010");
-        Assertions.assertThat(env.getProperty("logging.level.jdbc.sqlonly")).isEqualTo("info");
+        Assertions.assertThat(env.getProperty("logging.level.root")).isEqualTo("debug");
     }
 
     @Test

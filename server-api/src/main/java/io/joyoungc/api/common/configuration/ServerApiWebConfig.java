@@ -15,11 +15,5 @@ public class ServerApiWebConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         TimestampFormatAnnotationFormatterFactory factory = new TimestampFormatAnnotationFormatterFactory();
         registry.addFormatterForFieldAnnotation(factory);
-
-    }
-
-    @Bean
-    public MessageSource messageSource() {
-        return new JsonMessageSource("i18n");
     }
 }

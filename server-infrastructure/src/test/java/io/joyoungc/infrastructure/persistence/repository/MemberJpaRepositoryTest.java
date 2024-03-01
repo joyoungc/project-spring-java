@@ -5,9 +5,12 @@ import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
 import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,51 +23,65 @@ class MemberJpaRepositoryTest extends BaseJpaRepositoryTest {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    Environment environment;
+
     @Test
-    void find_by_id() {
-        // given
-        MemberEntity save = memberRepository.save(new MemberEntity("MyName", Grade.VIP));
-        entityManager.clear(); // Clear persistence context
-
-        // when
-        Optional<MemberEntity> member = memberRepository.findById(save.getId());
-
-        // then
-        Assertions.assertThat(member).isNotEmpty();
-        assertThat(member.get().getName()).isEqualTo("MyName");
+    void check_properties() {
+        String property1 = environment.getProperty("logging.level.jdbc.sqlonly");
+        System.out.println("property1 = " + property1);
     }
 
     @Test
-    void find_members() {
+    void test_findById() {
         // given
-        memberRepository.save(new MemberEntity("MyName", Grade.VIP));
+        MemberEntity save = createMember();
+
+        // then
+        assertThat(memberRepository.findById(save.getId()))
+                .isNotEmpty()
+                .hasValueSatisfying(s -> {
+                    assertThat(s.getName()).isEqualTo("MyName");
+                    assertThat(s.getGrade()).isEqualTo(Grade.VIP);
+                });
+    }
+
+    @Test
+    void test_findMembers() {
+        // given
+        createMember();
 
         // when
         List<MemberEntity> members = memberRepository.findMembers(Grade.VIP);
 
         // then
-        Assertions.assertThat(members).isNotEmpty();
+        assertThat(members).isNotEmpty();
     }
 
     @Test
-    void update() {
+    void test_update() {
         // given
-        MemberEntity save = memberRepository.save(new MemberEntity("MyName", Grade.VIP));
-        save.setGrade(Grade.BASIC);
+        MemberEntity save = createMember();
+        MemberEntity member = memberRepository.findById(save.getId()).orElseThrow();
+
+        // when
+        member.setGrade(Grade.BASIC);
         entityManager.flush();
         entityManager.clear();
 
-        // when
-        MemberEntity member = memberRepository.findById(save.getId()).get();
-
         // then
-        assertThat(member.getGrade()).isEqualTo(Grade.BASIC);
+        assertThat(memberRepository.findById(save.getId()))
+                .isNotEmpty()
+                .hasValueSatisfying(s -> {
+                    assertThat(s.getName()).isEqualTo("MyName");
+                    assertThat(s.getGrade()).isEqualTo(Grade.BASIC);
+                });
     }
 
     @Test
-    void delete() {
+    void test_delete() {
         // given
-        MemberEntity save = memberRepository.save(new MemberEntity("MyName", Grade.VIP));
+        MemberEntity save = createMember();
         Long id = save.getId();
 
         // when
@@ -73,8 +90,13 @@ class MemberJpaRepositoryTest extends BaseJpaRepositoryTest {
         entityManager.clear();
 
         // then
-        Optional<MemberEntity> optionalMember = memberRepository.findById(id);
-        Assertions.assertThat(optionalMember).isEmpty();
+        assertThat(memberRepository.findById(id)).isEmpty();
+    }
+
+    private MemberEntity createMember() {
+        MemberEntity save = memberRepository.save(new MemberEntity("MyName", Grade.VIP));
+        entityManager.clear(); // Clear persistence context
+        return save;
     }
 
 }

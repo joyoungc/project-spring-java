@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Persistence Port
  */
-public interface MemberRepository {
+public interface MemberRepositoryPort {
 
     Member findById(Long memberId);
 
