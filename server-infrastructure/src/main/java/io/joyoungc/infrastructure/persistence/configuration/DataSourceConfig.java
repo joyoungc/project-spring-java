@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Primary
     @Bean
+    @Primary
     @ConfigurationProperties("spring.datasource")
     public DataSourceProperties primaryDataSourceProperties() {
         return new DataSourceProperties();

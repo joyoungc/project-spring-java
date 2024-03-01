@@ -13,4 +13,6 @@ public final class Profiles {
 
     public static final String REDIS = "redis";
     public static final String MONGO = "mongo";
+
+    public static final String WEBMVC = "webmvc";
 }
