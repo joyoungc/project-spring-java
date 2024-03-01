@@ -1,12 +1,15 @@
 package io.joyoungc.api;
 
+import io.joyoungc.infrastructure.configuration.PersistenceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
 
-@SpringBootApplication(scanBasePackages = "io.joyoungc")
+@SpringBootApplication
+@Import({PersistenceConfig.class})
 public class ServerApiApplication {
 
     public static void main(String[] args) {

@@ -5,7 +5,7 @@ import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
 import io.joyoungc.domain.member.Member;
-import io.joyoungc.domain.member.MemberRepository;
+import io.joyoungc.domain.member.MemberRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,23 +21,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepositoryPort memberRepositoryPort;
 
     @Transactional
     public Long createMember(CreateMemberRequest dto) {
         Member member = MemberMapper.INSTANCE.toMember(dto);
-        return memberRepository.save(member);
+        return memberRepositoryPort.save(member);
     }
 
     @Transactional(readOnly = true)
     public MemberResponse getMember(long userId) {
-        Member member = memberRepository.findById(userId);
+        Member member = memberRepositoryPort.findById(userId);
         return MemberMapper.INSTANCE.toMemberResponse(member);
     }
 
     @Transactional(readOnly = true)
     public List<MemberResponse> getMembers(SearchMemberRequest search) {
-        List<Member> all = memberRepository.findMembers(search.getGrade());
+        List<Member> all = memberRepositoryPort.findMembers(search.getGrade());
         return MemberMapper.INSTANCE.toMemberResponseList(all);
     }
 
