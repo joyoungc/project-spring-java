@@ -31,10 +31,10 @@ class OrderIntegrationTest extends BaseServerApiIntegrationTest {
     private int port;
 
     @Autowired
-    MemberRepositoryPort memberRepository;
+    MemberRepositoryPort memberRepositoryPort;
 
     @Autowired
-    ProductRepositoryPort productRepository;
+    ProductRepositoryPort productRepositoryPort;
 
     private static final String API_ENDPOINT = "/api/orders";
 
@@ -46,8 +46,8 @@ class OrderIntegrationTest extends BaseServerApiIntegrationTest {
         Member member = new Member();
         member.setName("이름");
         member.setGrade(Grade.VIP);
-        memberId = memberRepository.save(member);
-        productId = productRepository.save(new Product("상품", 10000L));
+        memberId = memberRepositoryPort.save(member);
+        productId = productRepositoryPort.save(new Product("상품", 10000L));
     }
 
     @Test
