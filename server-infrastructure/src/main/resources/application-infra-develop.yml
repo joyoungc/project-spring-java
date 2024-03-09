@@ -18,26 +18,11 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 
-#logging:
-#  level:
-#    root: info
-#    jdbc:
-#      sqlonly: info
-#      sqltiming: off
-#      audit: off
-#      connection: off
-#      resultsettable: info
-#      resultset: off
-#    org:
-#      springframework:
-#        jdbc:
-#          datasource: DEBUG
-#      hibernate:
-#        SQL: DEBUG
-#        type:
-#          descriptor:
-#            sql:
-#              BasicBinder: TRACE
+client:
+  http-api:
+    endpoint: https://www.boredapi.com
+    connection-timeout: 5
+    read-timeout: 5
 
 decorator:
   datasource:

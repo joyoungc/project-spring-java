@@ -15,6 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
 
+    public Member(String name, Grade grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
     private Long id;
 
     private String name;
