@@ -6,13 +6,13 @@ public final class Profiles {
     }
 
     public static final String TEST = "test";
-    public static final String LOCAL = "local";
+    public static final String DEFAULT = "default";
     public static final String ALPHA = "alpha";
     public static final String BETA = "beta";
     public static final String PRODUCTION = "prod";
 
-    public static final String REDIS = "redis";
-    public static final String MONGO = "mongo";
+    public static final String CACHE = "infra-cache";
+    public static final String MONGO = "infra-mongo";
 
     public static final String WEBMVC = "webmvc";
 }
