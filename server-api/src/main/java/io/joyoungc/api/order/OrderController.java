@@ -27,12 +27,12 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public List<OrderResponse> getMemberOrders(@RequestParam long memberId) {
+    public List<OrderResponse> getMemberOrders(@RequestParam("memberId") long memberId) {
         return orderService.getMemberOrders(memberId);
     }
 
     @PatchMapping("/{orderId}")
-    public void updateOrder(@PathVariable long orderId, UpdateOrderRequest requestUpdate) {
+    public void updateOrder(@PathVariable("orderId") long orderId, UpdateOrderRequest requestUpdate) {
         orderService.updateOrder(orderId, requestUpdate);
     }
 

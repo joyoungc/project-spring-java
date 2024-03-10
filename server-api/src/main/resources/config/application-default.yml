@@ -4,11 +4,15 @@ spring:
     exclude: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 
 server-api:
-  redis:
-    enabled: false
   mongodb:
     enabled: false
 
 logging:
   level:
     root: info
+
+cache:
+  default-expire-minute: 10
+  cache-map-enabled: false # cache-map 사용여부
+  cache-map: # ApiCacheNames에 등록된 cache name
+    sample-names: 10 # cacheName : ttl(minute)
