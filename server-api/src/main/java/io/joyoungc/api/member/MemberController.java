@@ -51,7 +51,7 @@ public class MemberController {
      * @return
      */
     @GetMapping("/{id}")
-    public MemberResponse getMember(@PathVariable long id) {
+    public MemberResponse getMember(@PathVariable("id") long id) {
         return memberService.getMember(id);
     }
 
