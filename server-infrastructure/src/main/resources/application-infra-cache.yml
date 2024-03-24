@@ -18,7 +18,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: infra-prod
+      on-profile: infra-release
   data:
     redis:
       host:

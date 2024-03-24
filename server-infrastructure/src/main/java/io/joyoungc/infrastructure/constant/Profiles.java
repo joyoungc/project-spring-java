@@ -9,7 +9,7 @@ public final class Profiles {
     public static final String DEFAULT = "default";
     public static final String ALPHA = "alpha";
     public static final String BETA = "beta";
-    public static final String PRODUCTION = "prod";
+    public static final String RELEASE = "release";
 
     public static final String CACHE = "infra-cache";
     public static final String MONGO = "infra-mongo";
