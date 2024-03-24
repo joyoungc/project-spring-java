@@ -15,10 +15,10 @@ spring:
       json-format: false
       count-query: false
 
-logging:
-  level:
-    root: debug
-    jdbc: trace
+#logging:
+#  level:
+#    root: debug
+#    jdbc: trace
 #    org:
 #      springframework:
 #        jdbc:

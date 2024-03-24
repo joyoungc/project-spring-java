@@ -8,9 +8,13 @@ import io.joyoungc.infrastructure.constant.Profiles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -37,23 +41,12 @@ public class ServerCacheConfig {
 
     private final ServerCacheProperties serverCacheProperties;
 
-    @Value("${spring.data.redis.host}")
-    private String redisHost;
-
-//    @Value("${spring.data.redis.username}")
-//    private String redisUsername;
-
-//    @Value("${spring.data.redis.password}")
-//    private String redisPassword;
-
-    @Value("${spring.data.redis.port}")
-    private int redisPort;
-
     /**
      * Spring Boot 가 기본적으로 RedisCacheManager 를 자동 설정
      * Bean 을 선언하여 직접 설정한 RedisCacheConfiguration 이 적용
      */
     @Bean
+    @ConditionalOnBean(RedisConnectionFactory.class)
     public RedisCacheConfiguration cacheConfiguration() {
         return RedisCacheConfiguration
                 .defaultCacheConfig()
@@ -67,7 +60,7 @@ public class ServerCacheConfig {
      * cacheName 별로 캐시 설정을 위해 RedisCacheManagerBuilderCustomizer 를 사용
      */
     @Bean
-    @ConditionalOnProperty(prefix = "cache", name = "cache-map-enabled", havingValue = "true")
+    @ConditionalOnBean(RedisConnectionFactory.class)
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         Map<String, Integer> cacheNameMap = serverCacheProperties.getCacheMap();
         GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
@@ -83,7 +76,9 @@ public class ServerCacheConfig {
     }
 
     @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
+    @ConditionalOnProperty(prefix = "spring.cache", name = "type", havingValue = "redis")
+    public RedisConnectionFactory redisConnectionFactory(@Value("${spring.data.redis.host}") String redisHost,
+                                                         @Value("${spring.data.redis.port}") int redisPort) {
         RedisStandaloneConfiguration standaloneConfig = new RedisStandaloneConfiguration(redisHost, redisPort);
 //        standaloneConfig.setUsername(redisUsername);
 //        standaloneConfig.setPassword(redisPassword);
@@ -91,6 +86,15 @@ public class ServerCacheConfig {
         LettuceClientConfiguration clientConfig =
                 LettuceClientConfiguration.builder().build();
         return new LettuceConnectionFactory(standaloneConfig, clientConfig);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(RedisConnectionFactory.class)
+    public CacheManager cacheManager() {
+        ConcurrentMapCacheManager concurrentMapCacheManager = new ConcurrentMapCacheManager();
+        Map<String, Integer> cacheNameMap = serverCacheProperties.getCacheMap();
+        concurrentMapCacheManager.setCacheNames(cacheNameMap.keySet());
+        return concurrentMapCacheManager;
     }
 
     /**

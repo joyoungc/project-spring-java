@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringJUnitConfig(classes = {ServerCacheConfig.class, ServerCacheConfigTest.DummyCache.class,
         CacheAutoConfiguration.class}, initializers = ConfigDataApplicationContextInitializer.class)
 @TestPropertySource(properties = {
+        "spring.cache.type=simple",
         "cache.default-expire-minute=3",
         "cache.cache-map-enabled=true",
         "cache.cache-map.cache-name1=5",
@@ -31,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 @ActiveProfiles({Profiles.CACHE, Profiles.TEST})
 class ServerCacheConfigTest {
+
     @Autowired
     CacheManager cacheManager;
 
