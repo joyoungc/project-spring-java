@@ -11,12 +11,18 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     open-in-view: false
-  #    properties:
-  #      hibernate:
-  #        format_sql: true
-  #        hbm2ddl.auto: none
+    hibernate:
+      ddl-auto: none
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  sql:
+    init:
+      schema-locations:
+        - classpath:/sql/schema.sql
+      encoding: UTF-8
+      mode: embedded
+#      data-locations:
+#        - classpath:/sql/common-data.sql
 
 client:
   http-api:
