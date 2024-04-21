@@ -3,14 +3,11 @@ package io.joyoungc.infrastructure.persistence.mapper;
 import io.joyoungc.domain.member.Member;
 import io.joyoungc.domain.order.Order;
 import io.joyoungc.infrastructure.persistence.entity.MemberEntity;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = OrderMapper.class)
+@Mapper(componentModel = "spring", uses = OrderMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class MemberMapper {
 
     @Mapping(target = "orders", ignore = true)

@@ -9,7 +9,7 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.2'
+    id 'org.springframework.boot' version '3.2.5'
 }
 
 allprojects {
@@ -53,7 +53,7 @@ subprojects {
         systemProperty 'spring.profiles.active', System.getProperty('spring.profiles.active')
 
         testLogging {
-            showStandardStreams = true // Print standard out and standard error to the console.
+//            showStandardStreams = true // Print standard out and standard error to the console.
         }
 
         afterSuite { desc, result ->
@@ -61,7 +61,7 @@ subprojects {
                 def output = "Test Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
                 def startItem = '|  ', endItem = '  |'
                 def repeatLength = startItem.length() + output.length() + endItem.length()
-                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength) + '\n')
             }
         }
     }
