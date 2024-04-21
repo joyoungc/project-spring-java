@@ -5,6 +5,3 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
-logging:
-  level:
-    root: info
