@@ -1,3 +1,12 @@
+--DROP SCHEMA IF EXISTS app CASCADE;
+--CREATE SCHEMA app;
+--SET SCHEMA app;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS member;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS `user`;
+
+
 CREATE TABLE member
 (
     id     BIGINT AUTO_INCREMENT,
@@ -29,6 +38,7 @@ CREATE TABLE orders
     PRIMARY KEY (id)
 );
 
+
 CREATE TABLE product
 (
     id    BIGINT AUTO_INCREMENT,
@@ -42,5 +52,20 @@ CREATE TABLE product
 );
 
 ALTER TABLE orders ADD CONSTRAINT fk_orders_01 FOREIGN KEY (member_id) REFERENCES member (id);
-
 ALTER TABLE orders ADD CONSTRAINT fk_orders_02 FOREIGN KEY (product_id) REFERENCES product (id);
+
+
+CREATE TABLE `user`
+(
+    id     BIGINT AUTO_INCREMENT,
+    name          VARCHAR(255) not null,
+    password          VARCHAR(255),
+    email        VARCHAR(255),
+    status         VARCHAR(255) COMMENT '[VIP,BASIC]',
+    created_by    VARCHAR(255),
+    created_date  DATETIME COMMENT '생성일',
+    modified_by   VARCHAR(255),
+    modified_date DATETIME COMMENT '수정일',
+    PRIMARY KEY (id)
+);
+
