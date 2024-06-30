@@ -44,7 +44,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
     // jOOQ
-    implementation 'org.springframework.boot:spring-boot-starter-jooq:3.3.1'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation "org.jooq:jooq-meta-extensions:${jooqVersion}"
     jooqGenerator 'com.h2database:h2'
     jooqGenerator "org.jooq:jooq-meta-extensions:${jooqVersion}"
