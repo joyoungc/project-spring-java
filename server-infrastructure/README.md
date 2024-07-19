@@ -70,6 +70,13 @@ root@82fd6f4cc3b7:/# mongo
 
 ### MySQL
 - 설치 및 실행
+로컬 Data 폴더 만들기
+```shell
+$ cd /Users/joyoung
+$ mkdir -p /Data/mysql
+```
+
+mysql 설치
 ```shell
 $ cd docker/mysql
 $ docker-compose up -d
