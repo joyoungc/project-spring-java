@@ -3,7 +3,7 @@
  */
 package io.joyoungc.infrastructure.persistence.admin.entity;
 
-import io.joyoungc.domain.admin.User;
+import io.joyoungc.domain.admin.AdminUser;
 import io.joyoungc.infrastructure.persistence.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,13 +15,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserEntity extends AuditEntity {
+public class AdminUserEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String password;
     private String email;
-    private User.Status status;
+    private AdminUser.Status status;
 
 }

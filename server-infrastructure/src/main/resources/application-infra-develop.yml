@@ -21,8 +21,8 @@ spring:
         - classpath:/sql/schema.sql
       encoding: UTF-8
       mode: embedded
-#      data-locations:
-#        - classpath:/sql/common-data.sql
+      data-locations:
+        - classpath:/sql/common-data.sql
 
 client:
   http-api:

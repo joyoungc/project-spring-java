@@ -3,7 +3,9 @@
  */
 package io.joyoungc.domain.admin;
 
-public class User {
+public class AdminUser {
+
+    private long id;
 
     public enum Status {
         ACTIVE, INACTIVE, DELETED
