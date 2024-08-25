@@ -32,18 +32,16 @@ public class OrderService {
     private final OrderRepositoryPort orderRepository;
 
     @Transactional
-    public Long createOrder(Long memberId, Long productId) {
+    public OrderResponse createOrder(Long memberId, Long productId, LocalDateTime orderDateTime) {
         Member member = memberRepositoryPort.findById(memberId);
-
         Product product = productRepository.findById(productId);
-
         long discountPrice = discountPolicy.getDiscountPrice(member, product);
 
-        Order order = new Order(member, product, discountPrice, LocalDateTime.now());
+        Order order = new Order(member, product, discountPrice, orderDateTime);
 
-        Long orderId = orderRepository.save(order);
-        log.info("## Order created : {}", orderId);
-        return orderId;
+        Order newOrder = orderRepository.save(order);
+        log.info("## Order created : {}", newOrder);
+        return OrderMapper.INSTANCE.toOrderResponse(newOrder);
     }
 
     @Transactional

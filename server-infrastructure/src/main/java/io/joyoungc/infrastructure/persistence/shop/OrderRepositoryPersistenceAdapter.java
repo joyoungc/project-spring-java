@@ -18,10 +18,10 @@ public class OrderRepositoryPersistenceAdapter implements OrderRepositoryPort {
     private final OrderJpaRepository orderJpaRepository;
 
     @Override
-    public Long save(Order order) {
+    public Order save(Order order) {
         OrderEntity orderEntity = OrderMapper.INSTANCE.toOrderEntity(order);
         OrderEntity save = orderJpaRepository.save(orderEntity);
-        return save.getId();
+        return OrderMapper.INSTANCE.toOrder(save);
     }
 
     @Override

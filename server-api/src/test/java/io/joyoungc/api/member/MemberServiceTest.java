@@ -6,31 +6,29 @@ import io.joyoungc.api.member.response.MemberResponse;
 import io.joyoungc.domain.shop.member.Grade;
 import io.joyoungc.domain.shop.member.Member;
 import io.joyoungc.domain.shop.member.MemberRepositoryPort;
-import io.joyoungc.infrastructure.constant.Profiles;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
-@SpringJUnitConfig(classes = {MemberService.class})
-@ActiveProfiles(Profiles.TEST)
+@ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
-    @Autowired
+    @InjectMocks
     MemberService memberService;
 
-    @MockBean
+    @Mock
     MemberRepositoryPort memberRepositoryPort;
 
     @Test
-    void create_member() {
+    void test_createMember() {
         // given
         Mockito.when(memberRepositoryPort.save(any())).thenReturn(1L);
 
@@ -44,10 +42,12 @@ class MemberServiceTest {
     }
 
     @Test
-    void get_member() {
+    void test_getMember() {
         // given
         Member member = new Member();
         member.setId(1L);
+        member.setGrade(Grade.VIP);
+        member.setName("Jada");
         Mockito.when(memberRepositoryPort.findById(1L)).thenReturn(member);
 
         // when
@@ -56,6 +56,7 @@ class MemberServiceTest {
         // then
         assertThat(memberResponse).isNotNull();
         assertThat(memberResponse.getId()).isEqualTo(1L);
+        assertThat(memberResponse.getGrade()).isEqualTo(Grade.VIP);
     }
 
     @Test
