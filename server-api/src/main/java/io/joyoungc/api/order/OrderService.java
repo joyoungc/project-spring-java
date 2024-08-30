@@ -26,14 +26,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final MemberRepositoryPort memberRepositoryPort;
+    private final MemberRepositoryPort memberRepository;
     private final ProductRepositoryPort productRepository;
     private final DiscountPolicy discountPolicy;
     private final OrderRepositoryPort orderRepository;
 
     @Transactional
     public OrderResponse createOrder(Long memberId, Long productId, LocalDateTime orderDateTime) {
-        Member member = memberRepositoryPort.findById(memberId);
+        Member member = memberRepository.findById(memberId);
         Product product = productRepository.findById(productId);
         long discountPrice = discountPolicy.getDiscountPrice(member, product);
 
@@ -58,7 +58,7 @@ public class OrderService {
      */
     @Transactional(readOnly = true)
     public List<OrderResponse> getMemberOrders(Long memberId) {
-        Member member = memberRepositoryPort.findById(memberId);
+        Member member = memberRepository.findById(memberId);
         List<Order> orders = member.getOrders();
         List<OrderResponse> resultList = OrderMapper.INSTANCE.toOrderResponseList(orders);
         return resultList;

@@ -10,10 +10,10 @@ import io.joyoungc.domain.shop.product.Product;
  */
 public class FixedDiscountPolicy implements DiscountPolicy {
 
-    private final long fixedDiscountAmount = 1000;
+    private final long FIXED_DISCOUNT_AMOUNT = 1000;
 
     @Override
     public long getDiscountPrice(Member member, Product product) {
-        return member.getGrade() == Grade.VIP ? fixedDiscountAmount : 0;
+        return member.getGrade() == Grade.VIP ? FIXED_DISCOUNT_AMOUNT : 0;
     }
 }

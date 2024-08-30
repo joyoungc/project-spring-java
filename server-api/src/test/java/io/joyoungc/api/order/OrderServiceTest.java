@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.when;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
@@ -48,28 +50,37 @@ class OrderServiceTest {
     void test_createOrder() {
         // given
         Long mockOrderId = 100L;
-        Member member = new Member("이름", Grade.VIP);
-        member.setName("이름");
-        member.setGrade(Grade.VIP);
-        Mockito.when(memberRepositoryPort.findById(1L)).thenReturn(member);
+        LocalDateTime mcokLocalDateTime = LocalDateTime.of(2024, 8, 25, 10, 0);
+        long mockDiscountPrice = 1000L;
+        Member mockMember = new Member("이름", Grade.VIP);
+        Product mockProduct = new Product("상품", 10000L);
 
-        Product product = new Product("상품", 10000L);
-        Mockito.when(productRepositoryPort.findById(2L)).thenReturn(product);
-        Mockito.when(discountPolicy.getDiscountPrice(member, product)).thenReturn(0L);
+        when(memberRepositoryPort.findById(1L)).thenReturn(mockMember);
+        when(productRepositoryPort.findById(2L)).thenReturn(mockProduct);
+        when(discountPolicy.getDiscountPrice(mockMember, mockProduct)).thenReturn(mockDiscountPrice);
 
-        Order order = new Order();
-        order.setId(mockOrderId);
-        order.setDiscountPrice(0L);
-        order.setProduct(product);
-        Mockito.when(orderRepositoryPort.save(any())).thenReturn(order);
+        Order responseOrder = new Order(mockMember, mockProduct, mockDiscountPrice, mcokLocalDateTime);
+        responseOrder.setId(mockOrderId);
+
+        when(orderRepositoryPort.save(
+                argThat(o -> o.getMember().equals(mockMember) &&
+                        o.getProduct().equals(mockProduct) &&
+                        o.getDiscountPrice().equals(mockDiscountPrice) &&
+                        o.getOrderDate().equals(mcokLocalDateTime))))
+                .thenReturn(responseOrder);
 
         // when
-        OrderResponse orderResponse =
-                orderService.createOrder(1L, 2L, LocalDateTime.of(2024, 8, 25, 10, 0));
+        OrderResponse orderResponse = orderService.createOrder(1L, 2L, mcokLocalDateTime);
 
         // then
-        assertThat(orderResponse).isNotNull();
-        assertThat(orderResponse.getOrderId()).isEqualTo(mockOrderId);
-        assertThat(orderResponse.getProductName()).isEqualTo(product.getName());
+        assertThat(orderResponse)
+                .isNotNull()
+                .extracting(
+                        OrderResponse::getOrderId,
+                        OrderResponse::getDiscountPrice,
+                        OrderResponse::getProductName
+                )
+                .doesNotContainNull()
+                .containsExactly(mockOrderId, 1000L, mockProduct.getName());
     }
 }
