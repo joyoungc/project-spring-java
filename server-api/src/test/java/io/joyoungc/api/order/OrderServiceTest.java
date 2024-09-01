@@ -5,7 +5,6 @@ import io.joyoungc.domain.shop.member.Grade;
 import io.joyoungc.domain.shop.member.Member;
 import io.joyoungc.domain.shop.member.MemberRepositoryPort;
 import io.joyoungc.domain.shop.order.DiscountPolicy;
-import io.joyoungc.domain.shop.order.FixedDiscountPolicy;
 import io.joyoungc.domain.shop.order.Order;
 import io.joyoungc.domain.shop.order.OrderRepositoryPort;
 import io.joyoungc.domain.shop.product.Product;
@@ -15,17 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
@@ -49,28 +44,28 @@ class OrderServiceTest {
     @Test
     void test_createOrder() {
         // given
-        Long mockOrderId = 100L;
-        LocalDateTime mcokLocalDateTime = LocalDateTime.of(2024, 8, 25, 10, 0);
-        long mockDiscountPrice = 1000L;
-        Member mockMember = new Member("이름", Grade.VIP);
-        Product mockProduct = new Product("상품", 10000L);
+        Long orderId = 100L;
+        LocalDateTime orderDate = LocalDateTime.of(2024, 8, 25, 10, 0);
+        long discountPrice = 1000L;
+        Member member = new Member("이름", Grade.VIP);
+        Product product = new Product("상품", 10000L);
 
-        when(memberRepositoryPort.findById(1L)).thenReturn(mockMember);
-        when(productRepositoryPort.findById(2L)).thenReturn(mockProduct);
-        when(discountPolicy.getDiscountPrice(mockMember, mockProduct)).thenReturn(mockDiscountPrice);
+        given(memberRepositoryPort.findById(1L)).willReturn(member);
+        given(productRepositoryPort.findById(2L)).willReturn(product);
+        given(discountPolicy.getDiscountPrice(member, product)).willReturn(discountPrice);
 
-        Order responseOrder = new Order(mockMember, mockProduct, mockDiscountPrice, mcokLocalDateTime);
-        responseOrder.setId(mockOrderId);
+        Order responseOrder = new Order(member, product, discountPrice, orderDate);
+        responseOrder.setId(orderId);
 
-        when(orderRepositoryPort.save(
-                argThat(o -> o.getMember().equals(mockMember) &&
-                        o.getProduct().equals(mockProduct) &&
-                        o.getDiscountPrice().equals(mockDiscountPrice) &&
-                        o.getOrderDate().equals(mcokLocalDateTime))))
-                .thenReturn(responseOrder);
+        given(orderRepositoryPort.save(
+                argThat(o -> o.getMember().equals(member) &&
+                        o.getProduct().equals(product) &&
+                        o.getDiscountPrice().equals(discountPrice) &&
+                        o.getOrderDate().equals(orderDate))))
+                .willReturn(responseOrder);
 
         // when
-        OrderResponse orderResponse = orderService.createOrder(1L, 2L, mcokLocalDateTime);
+        OrderResponse orderResponse = orderService.createOrder(1L, 2L, orderDate);
 
         // then
         assertThat(orderResponse)
@@ -81,6 +76,6 @@ class OrderServiceTest {
                         OrderResponse::getProductName
                 )
                 .doesNotContainNull()
-                .containsExactly(mockOrderId, 1000L, mockProduct.getName());
+                .containsExactly(orderId, 1000L, product.getName());
     }
 }

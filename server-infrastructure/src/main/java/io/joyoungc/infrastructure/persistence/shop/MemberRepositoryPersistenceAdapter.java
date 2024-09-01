@@ -31,8 +31,7 @@ public class MemberRepositoryPersistenceAdapter implements MemberRepositoryPort 
     @Override
     @Transactional
     public Long save(Member member) {
-        MemberEntity memberEntity = new MemberEntity(member.getName(),
-                Grade.valueOf(member.getGrade().name()));
+        MemberEntity memberEntity = new MemberEntity(member.getName(), member.getGrade());
         return memberJpaRepository.save(memberEntity).getId();
     }
 
