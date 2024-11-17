@@ -4,6 +4,7 @@ import io.joyoungc.api.BaseServerApiIntegrationTest;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
+import io.joyoungc.domain.shop.member.Grade;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Disabled;
@@ -62,8 +63,9 @@ class MemberIntegrationTest extends BaseServerApiIntegrationTest {
         assertThat(list).isNotEmpty().element(0).satisfies(
                 c -> {
                     assertThat(c.getName()).isEqualTo("이름");
-                    assertThat(c.getModifiedDate()).isNull();
-                    assertThat(c.getCreatedDate()).isNotNull();
+                    assertThat(c.getModifiedAt()).isNull();
+                    assertThat(c.getGrade()).isEqualTo(Grade.BASIC);
+                    assertThat(c.getCreatedAt()).isNotNull();
                 }
         );
     }
@@ -110,7 +112,7 @@ class MemberIntegrationTest extends BaseServerApiIntegrationTest {
         CreateMemberRequest requestUser = new CreateMemberRequest("테스트", "생성자");
         Long userId = memberService.createMember(requestUser);
 
-        SearchMemberRequest search = new SearchMemberRequest();
+        SearchMemberRequest search = new SearchMemberRequest(Grade.BASIC);
         // redis json
         List<MemberResponse> users = memberService.getMembers(search);
         assertThat(users).isNotEmpty();

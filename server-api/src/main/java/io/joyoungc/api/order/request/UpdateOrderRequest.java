@@ -1,6 +1,6 @@
 package io.joyoungc.api.order.request;
 
-import io.joyoungc.domain.order.OrderStatus;
+import io.joyoungc.domain.shop.order.OrderStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;

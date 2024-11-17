@@ -1,59 +1,81 @@
 package io.joyoungc.api.order;
 
-import io.joyoungc.api.common.configuration.ServerApiConfig;
-import io.joyoungc.domain.member.Grade;
-import io.joyoungc.domain.member.Member;
-import io.joyoungc.domain.member.MemberRepositoryPort;
-import io.joyoungc.domain.order.OrderRepositoryPort;
-import io.joyoungc.domain.product.Product;
-import io.joyoungc.domain.product.ProductRepositoryPort;
-import io.joyoungc.infrastructure.constant.Profiles;
+import io.joyoungc.api.order.response.OrderResponse;
+import io.joyoungc.domain.shop.member.Grade;
+import io.joyoungc.domain.shop.member.Member;
+import io.joyoungc.domain.shop.member.MemberRepositoryPort;
+import io.joyoungc.domain.shop.order.DiscountPolicy;
+import io.joyoungc.domain.shop.order.Order;
+import io.joyoungc.domain.shop.order.OrderRepositoryPort;
+import io.joyoungc.domain.shop.product.Product;
+import io.joyoungc.domain.shop.product.ProductRepositoryPort;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.BDDMockito.given;
 
 @Slf4j
-@SpringJUnitConfig(classes = {OrderService.class, ServerApiConfig.class})
-@ActiveProfiles(Profiles.TEST)
+@ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
-    @Autowired
+    @InjectMocks
     OrderService orderService;
 
-    @MockBean
+    @Mock
     MemberRepositoryPort memberRepositoryPort;
 
-    @MockBean
+    @Mock
     ProductRepositoryPort productRepositoryPort;
 
-    @MockBean
+    @Mock
     OrderRepositoryPort orderRepositoryPort;
 
+    @Mock
+    DiscountPolicy discountPolicy;
+
     @Test
-    void create_order() {
+    void test_createOrder() {
         // given
+        Long orderId = 100L;
+        LocalDateTime orderDate = LocalDateTime.of(2024, 8, 25, 10, 0);
+        long discountPrice = 1000L;
         Member member = new Member("이름", Grade.VIP);
-        member.setName("이름");
-        member.setGrade(Grade.VIP);
-        Mockito.when(memberRepositoryPort.findById(1L)).thenReturn(member);
-
         Product product = new Product("상품", 10000L);
-        Mockito.when(productRepositoryPort.findById(2L)).thenReturn(product);
 
-        Mockito.when(orderRepositoryPort.save(any())).thenReturn(100L);
+        given(memberRepositoryPort.findById(1L)).willReturn(member);
+        given(productRepositoryPort.findById(2L)).willReturn(product);
+        given(discountPolicy.getDiscountPrice(member, product)).willReturn(discountPrice);
+
+        Order responseOrder = new Order(member, product, discountPrice, orderDate);
+        responseOrder.setId(orderId);
+
+        given(orderRepositoryPort.save(
+                argThat(o -> o.getMember().equals(member) &&
+                        o.getProduct().equals(product) &&
+                        o.getDiscountPrice().equals(discountPrice) &&
+                        o.getOrderDate().equals(orderDate))))
+                .willReturn(responseOrder);
 
         // when
-        Long orderId = orderService.createOrder(1L, 2L);
-        log.debug("## order : {}", orderId);
+        OrderResponse orderResponse = orderService.createOrder(1L, 2L, orderDate);
 
         // then
-        assertThat(orderId).isNotNull();
+        assertThat(orderResponse)
+                .isNotNull()
+                .extracting(
+                        OrderResponse::getOrderId,
+                        OrderResponse::getDiscountPrice,
+                        OrderResponse::getProductName
+                )
+                .doesNotContainNull()
+                .containsExactly(orderId, 1000L, product.getName());
     }
 }

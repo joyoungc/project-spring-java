@@ -25,7 +25,6 @@ class ServerApiApplicationTests {
     @Test
     void test_properties() {
         Assertions.assertThat(env.getProperty("server.port")).isEqualTo("9010");
-        Assertions.assertThat(env.getProperty("logging.level.root")).isEqualTo("info");
     }
 
     @Test

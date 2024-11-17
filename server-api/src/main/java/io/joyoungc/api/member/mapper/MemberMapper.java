@@ -3,7 +3,7 @@ package io.joyoungc.api.member.mapper;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
 import io.joyoungc.api.order.mapper.OrderMapper;
-import io.joyoungc.domain.member.Member;
+import io.joyoungc.domain.shop.member.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

@@ -3,11 +3,13 @@ package io.joyoungc.api.order;
 import io.joyoungc.api.order.request.CreateOrderRequest;
 import io.joyoungc.api.order.request.UpdateOrderRequest;
 import io.joyoungc.api.order.response.OrderResponse;
+import io.joyoungc.domain.shop.order.Order;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /***
@@ -22,8 +24,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("")
-    public Long createOrder(@Valid @RequestBody CreateOrderRequest requestCreate) {
-        return orderService.createOrder(requestCreate.getMemberId(), requestCreate.getProductId());
+    public OrderResponse createOrder(@Valid @RequestBody CreateOrderRequest requestCreate) {
+        return orderService.createOrder(requestCreate.getMemberId(), requestCreate.getProductId(), LocalDateTime.now());
     }
 
     @GetMapping("")
