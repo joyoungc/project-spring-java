@@ -1,6 +1,6 @@
 package io.joyoungc.infrastructure.persistence.admin.repository;
 
-import io.joyoungc.domain.admin.AdminUser;
+import io.joyoungc.domain.model.admin.AdminUser;
 import io.joyoungc.infrastructure.constant.Profiles;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

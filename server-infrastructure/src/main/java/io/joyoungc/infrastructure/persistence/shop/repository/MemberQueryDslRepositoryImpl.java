@@ -2,7 +2,7 @@ package io.joyoungc.infrastructure.persistence.shop.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.joyoungc.domain.shop.member.Grade;
+import io.joyoungc.domain.model.member.Grade;
 import io.joyoungc.infrastructure.persistence.shop.entity.MemberEntity;
 import lombok.RequiredArgsConstructor;
 

@@ -1,7 +1,7 @@
 package io.joyoungc.infrastructure.persistence.shop.entity;
 
-import io.joyoungc.domain.shop.member.Address;
-import io.joyoungc.domain.shop.member.Grade;
+import io.joyoungc.domain.model.member.Address;
+import io.joyoungc.domain.model.member.Grade;
 import io.joyoungc.infrastructure.persistence.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

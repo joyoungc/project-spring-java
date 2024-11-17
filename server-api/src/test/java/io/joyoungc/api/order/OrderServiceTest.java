@@ -1,14 +1,14 @@
 package io.joyoungc.api.order;
 
 import io.joyoungc.api.order.response.OrderResponse;
-import io.joyoungc.domain.shop.member.Grade;
-import io.joyoungc.domain.shop.member.Member;
-import io.joyoungc.domain.shop.member.MemberRepositoryPort;
-import io.joyoungc.domain.shop.order.DiscountPolicy;
-import io.joyoungc.domain.shop.order.Order;
-import io.joyoungc.domain.shop.order.OrderRepositoryPort;
-import io.joyoungc.domain.shop.product.Product;
-import io.joyoungc.domain.shop.product.ProductRepositoryPort;
+import io.joyoungc.application.output.MemberRepositoryPort;
+import io.joyoungc.domain.model.member.Grade;
+import io.joyoungc.domain.model.member.Member;
+import io.joyoungc.domain.model.order.DiscountPolicy;
+import io.joyoungc.domain.model.order.Order;
+import io.joyoungc.application.output.OrderRepositoryPort;
+import io.joyoungc.domain.model.product.Product;
+import io.joyoungc.application.output.ProductRepositoryPort;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

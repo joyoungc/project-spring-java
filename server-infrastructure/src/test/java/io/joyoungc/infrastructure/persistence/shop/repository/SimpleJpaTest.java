@@ -2,8 +2,8 @@ package io.joyoungc.infrastructure.persistence.shop.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.joyoungc.domain.common.constant.CommonError;
-import io.joyoungc.domain.common.exception.ApplicationException;
+import io.joyoungc.application.exception.ApplicationException;
+import io.joyoungc.domain.constant.CommonError;
 import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
 import io.joyoungc.infrastructure.persistence.shop.entity.MemberEntity;
 import io.joyoungc.infrastructure.persistence.shop.entity.OrderEntity;

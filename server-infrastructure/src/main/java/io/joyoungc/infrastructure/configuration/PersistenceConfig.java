@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@ComponentScan(basePackages = {
-        "io.joyoungc.infrastructure.persistence"
-})
+@ComponentScan(basePackages = {"io.joyoungc.infrastructure.persistence"})
 @Profile("!" + Profiles.WEBMVC)
 public class PersistenceConfig {
 }

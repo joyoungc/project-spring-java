@@ -1,7 +1,7 @@
 package io.joyoungc.infrastructure.persistence.admin.repository;
 
 
-import io.joyoungc.domain.admin.AdminUser;
+import io.joyoungc.domain.model.admin.AdminUser;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

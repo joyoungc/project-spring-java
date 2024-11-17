@@ -1,10 +1,10 @@
 package io.joyoungc.infrastructure.persistence.shop;
 
-import io.joyoungc.domain.common.constant.CommonError;
-import io.joyoungc.domain.common.exception.ApplicationException;
-import io.joyoungc.domain.shop.member.Grade;
-import io.joyoungc.domain.shop.member.Member;
-import io.joyoungc.domain.shop.member.MemberRepositoryPort;
+import io.joyoungc.application.exception.ApplicationException;
+import io.joyoungc.application.output.MemberRepositoryPort;
+import io.joyoungc.domain.constant.CommonError;
+import io.joyoungc.domain.model.member.Grade;
+import io.joyoungc.domain.model.member.Member;
 import io.joyoungc.infrastructure.persistence.configuration.PersistenceAdapter;
 import io.joyoungc.infrastructure.persistence.shop.entity.MemberEntity;
 import io.joyoungc.infrastructure.persistence.shop.mapper.MemberMapper;

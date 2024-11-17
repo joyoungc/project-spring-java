@@ -1,10 +1,14 @@
 package io.joyoungc.api.member;
 
 import io.joyoungc.api.BaseServerApiIntegrationTest;
+import io.joyoungc.api.member.mapper.MemberMapper;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
-import io.joyoungc.domain.shop.member.Grade;
+import io.joyoungc.application.input.MemberCommand;
+import io.joyoungc.application.input.MemberService;
+import io.joyoungc.domain.model.member.Grade;
+import io.joyoungc.domain.model.member.Member;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Disabled;
@@ -110,15 +114,18 @@ class MemberIntegrationTest extends BaseServerApiIntegrationTest {
     void get_cached_members() {
         // 테스트 사용자 등록
         CreateMemberRequest requestUser = new CreateMemberRequest("테스트", "생성자");
-        Long userId = memberService.createMember(requestUser);
+        Member member = MemberMapper.INSTANCE.toMember(requestUser);
+        Long userId = memberService.createMember(member);
 
         SearchMemberRequest search = new SearchMemberRequest(Grade.BASIC);
+
+        MemberCommand command = MemberMapper.INSTANCE.toSearch(search);
         // redis json
-        List<MemberResponse> users = memberService.getMembers(search);
+        List<Member> users = memberService.getMembers(command);
         assertThat(users).isNotEmpty();
 
         // 한번 더 조회시 캐시 여부 확인
-        List<MemberResponse> users1 = memberService.getMembers(search);
+        List<Member> users1 = memberService.getMembers(command);
         assertThat(users1).isNotEmpty();
     }
 

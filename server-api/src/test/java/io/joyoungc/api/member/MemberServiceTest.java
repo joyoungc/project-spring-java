@@ -1,22 +1,22 @@
 package io.joyoungc.api.member;
 
+import io.joyoungc.api.member.mapper.MemberMapper;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
-import io.joyoungc.domain.shop.member.Grade;
-import io.joyoungc.domain.shop.member.Member;
-import io.joyoungc.domain.shop.member.MemberRepositoryPort;
+import io.joyoungc.application.input.MemberService;
+import io.joyoungc.application.output.MemberRepositoryPort;
+import io.joyoungc.domain.model.member.Grade;
+import io.joyoungc.domain.model.member.Member;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.given;
 
@@ -40,7 +40,7 @@ class MemberServiceTest {
         )).willReturn(1L);
 
         // when
-        Long id = memberService.createMember(requestMember);
+        Long id = memberService.createMember(MemberMapper.INSTANCE.toMember(requestMember));
 
         // then
         assertThat(id).isNotNull().isEqualTo(1L);
@@ -55,7 +55,7 @@ class MemberServiceTest {
         given(memberRepositoryPort.findById(memberId)).willReturn(member);
 
         // when
-        MemberResponse memberResponse = memberService.getMember(memberId);
+        MemberResponse memberResponse = MemberMapper.INSTANCE.toMemberResponse(memberService.getMember(memberId));
 
         // then
         assertThat(memberResponse)
@@ -75,7 +75,7 @@ class MemberServiceTest {
 
         // when
         SearchMemberRequest search = new SearchMemberRequest(Grade.VIP);
-        List<MemberResponse> members = memberService.getMembers(search);
+        List<MemberResponse> members = MemberMapper.INSTANCE.toMemberResponseList(memberService.getMembers(MemberMapper.INSTANCE.toSearch(search)));
 
         // then
         assertThat(members).isNotEmpty();

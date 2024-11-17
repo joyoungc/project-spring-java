@@ -3,7 +3,7 @@
  */
 package io.joyoungc.infrastructure.persistence.admin.entity;
 
-import io.joyoungc.domain.admin.AdminUser;
+import io.joyoungc.domain.model.admin.AdminUser;
 import io.joyoungc.infrastructure.persistence.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

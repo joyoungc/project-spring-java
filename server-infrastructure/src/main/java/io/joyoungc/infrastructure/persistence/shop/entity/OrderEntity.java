@@ -1,6 +1,6 @@
 package io.joyoungc.infrastructure.persistence.shop.entity;
 
-import io.joyoungc.domain.shop.order.OrderStatus;
+import io.joyoungc.domain.model.order.OrderStatus;
 import io.joyoungc.infrastructure.persistence.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

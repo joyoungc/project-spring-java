@@ -1,7 +1,7 @@
 package io.joyoungc.api.common.configuration;
 
-import io.joyoungc.domain.shop.order.DiscountPolicy;
-import io.joyoungc.domain.shop.order.FixedDiscountPolicy;
+import io.joyoungc.domain.model.order.DiscountPolicy;
+import io.joyoungc.domain.model.order.FixedDiscountPolicy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,7 +1,7 @@
 package io.joyoungc.api.order.mapper;
 
 import io.joyoungc.api.order.response.OrderResponse;
-import io.joyoungc.domain.shop.order.Order;
+import io.joyoungc.domain.model.order.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

@@ -1,9 +1,11 @@
 package io.joyoungc.api.member.mapper;
 
 import io.joyoungc.api.member.request.CreateMemberRequest;
+import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
 import io.joyoungc.api.order.mapper.OrderMapper;
-import io.joyoungc.domain.shop.member.Member;
+import io.joyoungc.application.input.MemberCommand;
+import io.joyoungc.domain.model.member.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -20,4 +22,6 @@ public interface MemberMapper {
     MemberResponse toMemberResponse(Member member);
 
     List<MemberResponse> toMemberResponseList(List<Member> members);
+
+    MemberCommand toSearch(SearchMemberRequest search);
 }

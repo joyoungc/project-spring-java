@@ -1,7 +1,7 @@
 package io.joyoungc.infrastructure.persistence.shop.mapper;
 
-import io.joyoungc.domain.shop.member.Member;
-import io.joyoungc.domain.shop.order.Order;
+import io.joyoungc.domain.model.member.Member;
+import io.joyoungc.domain.model.order.Order;
 import io.joyoungc.infrastructure.persistence.shop.entity.MemberEntity;
 import org.mapstruct.*;
 

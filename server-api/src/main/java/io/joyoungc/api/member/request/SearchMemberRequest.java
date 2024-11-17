@@ -1,6 +1,6 @@
 package io.joyoungc.api.member.request;
 
-import io.joyoungc.domain.shop.member.Grade;
+import io.joyoungc.domain.model.member.Grade;
 import lombok.*;
 
 @Getter

@@ -1,10 +1,15 @@
 package io.joyoungc.api.member;
 
+import io.joyoungc.api.member.mapper.MemberMapper;
 import io.joyoungc.api.member.request.CreateMemberRequest;
 import io.joyoungc.api.member.request.SearchMemberRequest;
 import io.joyoungc.api.member.response.MemberResponse;
-import io.joyoungc.domain.common.CommonResponse;
-import io.joyoungc.domain.common.constant.ResponseCode;
+import io.joyoungc.application.input.MemberCommand;
+import io.joyoungc.application.input.MemberService;
+import io.joyoungc.application.input.MemberUseCase;
+import io.joyoungc.domain.model.common.CommonResponse;
+import io.joyoungc.domain.constant.ResponseCode;
+import io.joyoungc.domain.model.member.Member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +26,7 @@ import java.util.List;
 @RequestMapping("/api/members")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberUseCase memberService;
 
     /**
      * 회원 전체 조회
@@ -30,7 +35,8 @@ public class MemberController {
      */
     @GetMapping
     public List<MemberResponse> getMembers(SearchMemberRequest search) {
-        return memberService.getMembers(search);
+        MemberCommand command = MemberMapper.INSTANCE.toSearch(search);
+        return MemberMapper.INSTANCE.toMemberResponseList(memberService.getMembers(command));
     }
 
     /**
@@ -41,7 +47,8 @@ public class MemberController {
      */
     @PostMapping
     public CommonResponse createMember(@RequestBody @Valid CreateMemberRequest dto) {
-        Long memberId = memberService.createMember(dto);
+        Member member = MemberMapper.INSTANCE.toMember(dto);
+        Long memberId = memberService.createMember(member);
         return CommonResponse.of(ResponseCode.SUCCESS, "memberId : " + memberId);
     }
 
@@ -52,7 +59,7 @@ public class MemberController {
      */
     @GetMapping("/{id}")
     public MemberResponse getMember(@PathVariable("id") long id) {
-        return memberService.getMember(id);
+        return MemberMapper.INSTANCE.toMemberResponse(memberService.getMember(id)) ;
     }
 
 }

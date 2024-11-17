@@ -1,7 +1,7 @@
 package io.joyoungc.infrastructure.persistence.shop.repository;
 
-import io.joyoungc.domain.shop.member.Grade;
-import io.joyoungc.domain.shop.order.OrderStatus;
+import io.joyoungc.domain.model.member.Grade;
+import io.joyoungc.domain.model.order.OrderStatus;
 import io.joyoungc.infrastructure.persistence.BaseJpaRepositoryTest;
 import io.joyoungc.infrastructure.persistence.shop.entity.MemberEntity;
 import io.joyoungc.infrastructure.persistence.shop.entity.OrderEntity;

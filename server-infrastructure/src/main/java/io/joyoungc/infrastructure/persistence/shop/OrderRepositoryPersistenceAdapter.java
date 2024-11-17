@@ -1,10 +1,10 @@
 package io.joyoungc.infrastructure.persistence.shop;
 
 
-import io.joyoungc.domain.common.constant.CommonError;
-import io.joyoungc.domain.common.exception.ApplicationException;
-import io.joyoungc.domain.shop.order.Order;
-import io.joyoungc.domain.shop.order.OrderRepositoryPort;
+import io.joyoungc.application.exception.ApplicationException;
+import io.joyoungc.domain.constant.CommonError;
+import io.joyoungc.domain.model.order.Order;
+import io.joyoungc.application.output.OrderRepositoryPort;
 import io.joyoungc.infrastructure.persistence.configuration.PersistenceAdapter;
 import io.joyoungc.infrastructure.persistence.shop.entity.OrderEntity;
 import io.joyoungc.infrastructure.persistence.shop.mapper.OrderMapper;
