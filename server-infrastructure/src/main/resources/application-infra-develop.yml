@@ -29,6 +29,10 @@ client:
     endpoint: https://www.boredapi.com
     connection-timeout: 5
     read-timeout: 5
+  user-api:
+    endpoint: https://fakerapi.it
+    connection-timeout: 5
+    read-timeout: 5
 
 decorator:
   datasource:

@@ -28,9 +28,9 @@ public class Member {
 
     private String modifiedBy;
 
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifiedAt;
 
     private Grade grade;
 

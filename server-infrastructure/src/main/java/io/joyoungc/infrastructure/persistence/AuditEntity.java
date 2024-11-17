@@ -28,11 +28,11 @@ public abstract class AuditEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    protected LocalDateTime createdDate;
+    protected LocalDateTime createdAt;
 
     @LastModifiedBy
     protected String modifiedBy;
 
     @LastModifiedDate
-    protected LocalDateTime modifiedDate;
+    protected LocalDateTime modifiedAt;
 }

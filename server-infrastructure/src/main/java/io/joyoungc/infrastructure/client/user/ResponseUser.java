@@ -1,0 +1,54 @@
+package io.joyoungc.infrastructure.client.user;
+
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * {"status":"OK","code":200,"locale":"ko_KR","seed":null,"total":2,"data":[{"id":1,"firstname":"\ub3d9\uc724","lastname":"\uc804","email":"jiyeon.oh@gmail.com","phone":"+22671576298","birthday":"1945-07-06","gender":"male","address":{"id":1,"street":"445 \uc7a0\uc2e4\ub85c","streetName":"\uc601\ub3d9\ub300\ub85c","buildingNumber":"6563","city":"\uc774\ucc9c\uc2dc","zipcode":"59903","country":"\ud540\ub780\ub4dc","county_code":"SI","latitude":-1.344294,"longitude":59.507255},"website":"http:\/\/son.com","image":"http:\/\/placeimg.com\/640\/480\/people"},{"id":2,"firstname":"\uc815\ubbfc","lastname":"\ucc44","email":"miyoung71@gmail.com","phone":"+2917147715","birthday":"1936-01-22","gender":"female","address":{"id":1,"street":"776 \uc0bc\uc131\ub85c","streetName":"\uc11c\ucd08\ub300\ub85c","buildingNumber":"2308","city":"\uad6c\ub9ac\uc2dc","zipcode":"29632","country":"\ucf54\ubaa8\ub85c","county_code":"BM","latitude":61.206698,"longitude":130.441934},"website":"http:\/\/park.biz","image":"http:\/\/placeimg.com\/640\/480\/people"}]}
+ */
+@Getter
+@Setter
+@ToString
+public class ResponseUser {
+    private int total;
+    private int code;
+    private Object seed;
+    private List<DataItem> data;
+    private String locale;
+    private String status;
+
+	@Getter
+	@Setter
+    @ToString
+    public static class Address {
+        private String zipcode;
+        private String country;
+        private String streetName;
+        private String city;
+        private String countyCode;
+        private String street;
+        private Object latitude;
+        private String buildingNumber;
+        private int id;
+        private Object longitude;
+    }
+
+	@Getter
+	@Setter
+    @ToString
+    public static class DataItem {
+        private String birthday;
+        private String image;
+        private String firstname;
+        private String website;
+        private Address address;
+        private String gender;
+        private String phone;
+        private int id;
+        private String email;
+        private String lastname;
+    }
+}

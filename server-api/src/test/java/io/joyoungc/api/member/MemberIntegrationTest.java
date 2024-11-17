@@ -63,8 +63,9 @@ class MemberIntegrationTest extends BaseServerApiIntegrationTest {
         assertThat(list).isNotEmpty().element(0).satisfies(
                 c -> {
                     assertThat(c.getName()).isEqualTo("이름");
-                    assertThat(c.getModifiedDate()).isNull();
-                    assertThat(c.getCreatedDate()).isNotNull();
+                    assertThat(c.getModifiedAt()).isNull();
+                    assertThat(c.getGrade()).isEqualTo(Grade.BASIC);
+                    assertThat(c.getCreatedAt()).isNotNull();
                 }
         );
     }

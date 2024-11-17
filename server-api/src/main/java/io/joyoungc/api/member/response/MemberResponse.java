@@ -20,11 +20,11 @@ public class MemberResponse {
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime createdDate;
+    private LocalDateTime createdAt;
 
     private String modifiedBy;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifiedAt;
 }
