@@ -4,9 +4,9 @@ pluginManagement {
     }
 }
 rootProject.name = 'project-spring-java'
-include 'server-domain'
-include 'server-application'
-include 'server-infrastructure'
-include 'server-api'
-include 'server-batch'
+include 'backend-domain'
+include 'backend-application'
+include 'backend-infrastructure'
+include 'backend-api'
+include 'backend-batch'
 

@@ -4,7 +4,7 @@
 ## 1. Application Architecture
 
 ### Domain
-#### server-domain
+#### backend-domain
 - DDD의 그 Domain Layer로 기술에 독립적인 POJO로 개발
 - 프로젝트를 위한 공통 Business 코드
 - Utility, Extension, Constants, Entity, VO(Enum 포함), Aggregate를 포함하며 프로젝트 도메인의 비즈니스 룰을 정의
@@ -12,6 +12,7 @@
 - gradle에 어떤 dependency도 포함하지 않음 
 
 ### Application
+#### backend-application
 - domain의 요소를 사용하여 시스템이 가지는 기능/사례를 정의한 집합
 - 구성 요소
     - Input Port (use case)
@@ -23,16 +24,16 @@
 - 의존성은 domain 에 대해서만 가짐
 
 ### Adapter (input/output)
-#### server-infrastructure
+#### backend-infrastructure
 - Secondary/Driven Adapters
 - Persistence 및 External System
 - infrastructure 의 Configuration, 데이터 관련 공통 라이브러리 및 DB Entity, Repository 가 포함됨
 
-#### server-api
+#### backend-api
 - Primary/Driving Adapters (User Interface)
 - spring boot 기반 REST API 서버
  
-#### server-batch (Input Adapter for worker)
+#### backend-batch (Input Adapter for worker)
 - Primary/Driving Adapters (User Interface)
 - spring boot 기반 BATCH Application
 
