@@ -1,0 +1,20 @@
+# Common application properties for backend-api
+server:
+  port : 9010
+  shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  profiles:
+    group:
+      default:
+        - infra-develop
+      test:
+        - infra-develop
+      release:
+        - infra-release
+
+logging:
+  config: classpath:logback/logback.xml
