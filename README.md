@@ -69,7 +69,7 @@ Or, if you don't want/need a background service you can just run:
 - Project Structure > Project Settings > Project
    - SDK -> Set to temurin jdk 21
 - Project Structure > Project Settings > Modules
-   - Dependencies -> Mudule SDK -> Set to temurin jdk 21
+   - Dependencies -> Module SDK -> Set to temurin jdk 21
 - Settings > Build, Execution, Deployment > Build Tools > Gradle
    - Gradle JVM -> Set to temurin jdk 21
 
