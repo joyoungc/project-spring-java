@@ -39,7 +39,7 @@ dependencies {
 
     // database
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1")
-    runtimeOnly("mysql:mysql-connector-java:8.0.33")
+    runtimeOnly("com.mysql:mysql-connector-j:8.3.0")
     runtimeOnly("com.h2database:h2")
 
     // mapstruct
