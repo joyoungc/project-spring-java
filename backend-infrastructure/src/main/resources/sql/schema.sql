@@ -110,7 +110,7 @@ CREATE TABLE permissions
 CREATE TABLE roles_secondary (
     id                          BIGINT AUTO_INCREMENT PRIMARY KEY,
     name                        VARCHAR(100) NOT NULL COMMENT '이름',
-    roles_id                    INT NOT NULL,
+    roles_id                    BIGINT NOT NULL,
     management_account_type     VARCHAR(20) NOT NULL COMMENT '[ALL, BILLING, PARTNER, PROMOTION] 관리계정 ',
     log_view_policy_type        VARCHAR(20) NULL COMMENT '[ALL_ACCOUNT, MY_ACCOUNT] 운영로그 조회범위  ALL_ACCOUNT:전체사용자 MY_ACCOUNT:내 권한계정 사용자',
     mail_domain                 VARCHAR(100) NOT NULL,
@@ -131,8 +131,8 @@ CREATE index ix_roles_secondary_01
 -- 1차 권한과 permission 매핑 테이블
 CREATE TABLE roles_permissions (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    roles_id        INT NOT NULL,
-    permissions_id  INT NOT NULL,
-    CONSTRAINT fk_roles_permissions_01 FOREIGN KEY (roles_id) REFERENCES ROLES (id),
+    roles_id        BIGINT NOT NULL,
+    permissions_id  BIGINT NOT NULL,
+    CONSTRAINT fk_roles_permissions_01 FOREIGN KEY (roles_id) REFERENCES roles (id),
     CONSTRAINT fk_roles_permissions_02 FOREIGN KEY (permissions_id) REFERENCES permissions (id)
 );
