@@ -5,7 +5,9 @@ package io.joyoungc.domain.enums;
  */
 public enum ResponseCode {
     SUCCESS("00", "성공"),
-    DUPLICATED("01", "중복된 요청");
+    DUPLICATED("01", "중복된 요청"),
+    FAILED("99", "실패")
+    ;
     private String code;
     private String message;
 
