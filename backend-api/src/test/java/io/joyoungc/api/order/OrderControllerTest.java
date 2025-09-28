@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /***
  * Created by Aiden Jeong on 2022.04.03
  */
-class OrderIntegrationTest extends BaseServerApiIntegrationTest {
+class OrderControllerTest extends BaseServerApiIntegrationTest {
 
     @LocalServerPort
     private int port;
