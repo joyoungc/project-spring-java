@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}"/>
+
+    <!-- Set up global loggers here -->
+    <logger name="io.joyoungc" level="DEBUG"/>
+
+    <!-- configuration to be enabled when the "default" or "test" profiles are active -->
+    <springProfile name="default | test">
+        <!-- Root Logger -->
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- configuration to be enabled when the "develop" profiles are active -->
+    <springProfile name="develop">
+        <!-- Root Logger -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- configuration to be enabled when the "release" profile is active -->
+    <springProfile name="release">
+        <!-- Root Logger -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- configuration to be enabled when the "release" profile is not active -->
+    <springProfile name="!release">
+        <logger name="org.springframework.security" level="DEBUG" additivity="false"/>
+        <logger name="org.springframework.web" level="DEBUG" additivity="false"/>
+        <logger name="org.apache.hc.client5.http" level="DEBUG" additivity="false"/>
+    </springProfile>
+
+</configuration>

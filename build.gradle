@@ -2,19 +2,10 @@ buildscript {
     dependencies {
 //        classpath 'org.yaml:snakeyaml:1.33'
     }
-    repositories {
-        mavenCentral()
-    }
 }
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.2'
-}
-
-allprojects {
-    group = 'io.joyoungc'
-    version = '0.0.1-SNAPSHOT'
 }
 
 subprojects {
@@ -22,38 +13,35 @@ subprojects {
     version = '0.0.1-SNAPSHOT'
 
     apply plugin: 'java-library'
-    apply plugin: 'java-test-fixtures'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = '21'
     targetCompatibility = '21'
+
+    ext {
+        springBootVersion = '3.3.1'
+        springDependencyManagementVersion = '1.1.3'
+    }
 
     repositories {
         mavenCentral()
     }
 
-    dependencyManagement {
-    }
-
     dependencies {
         // lombok
-        implementation 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-        testAnnotationProcessor "org.projectlombok:lombok"
+        implementation 'org.projectlombok:lombok:1.18.32'
+        annotationProcessor 'org.projectlombok:lombok:1.18.32'
+        testAnnotationProcessor "org.projectlombok:lombok:1.18.32"
 
         // commons
-        implementation 'org.apache.commons:commons-lang3'
+        implementation 'org.apache.commons:commons-lang3:3.14.0'
         implementation 'org.apache.commons:commons-collections4:4.4'
     }
 
     test {
         useJUnitPlatform()
 
-        systemProperty 'spring.profiles.active', System.getProperty('spring.profiles.active')
-
         testLogging {
-            showStandardStreams = true // Print standard out and standard error to the console.
+//            showStandardStreams = true // Print standard out and standard error to the console.
         }
 
         afterSuite { desc, result ->
@@ -61,7 +49,7 @@ subprojects {
                 def output = "Test Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
                 def startItem = '|  ', endItem = '  |'
                 def repeatLength = startItem.length() + output.length() + endItem.length()
-                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength) + '\n')
             }
         }
     }
