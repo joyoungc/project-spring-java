@@ -11,3 +11,11 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
+// Library modules do not have an executable application entry point.
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
