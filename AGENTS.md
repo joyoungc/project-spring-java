@@ -1,128 +1,51 @@
 # 에이전트 가이드
 
-## 개발 환경
+## 안내 문서와 기준
 
-| 항목 | 기준 |
-| --- | --- |
-| Java | JDK 21 |
-| Gradle | Wrapper 8.5 (`./gradlew`) |
-| Spring Boot | 3.3.1 |
-| 데이터베이스 | MySQL, H2, Redis/Spring Cache |
+- 작업 전에 [README.md](README.md)의 프로젝트 구조, 개발 환경, 빌드·실행·테스트 안내를 읽는다.
+- 버전과 의존성은 루트 및 각 모듈의 `build.gradle`, Gradle Wrapper 설정을 기준으로 확인한다.
+- 환경, 명령어, 모듈 구조의 공통 설명은 README.md에서 관리한다.
+- 이 파일에는 에이전트의 변경 규칙과 검증 의무를 유지한다.
+- 실행 방법이나 프로젝트 구성을 변경하면 README.md도 함께 갱신한다.
 
-## 자주 쓰는 명령어
+## 아키텍처와 Bean 등록
 
-```bash
-# 전체 검증 및 테스트
-./gradlew build
-./gradlew test
+- README.md의 모듈 의존성 방향을 유지한다. 도메인 규칙은 `backend-domain`에 둔다.
+- `backend-domain`에 Spring 의존성이나 Spring 애노테이션을 추가하지 않는다.
+- Use Case는 Input Port, 영속성 및 외부 시스템 연동은 Output Port와 Adapter로 분리한다.
+- 기존 애플리케이션 서비스의 `@Service` 등록은 유지한다.
+  새 서비스도 현재 `ApplicationConfig`의 input 패키지 스캔 방식에 맞춘다.
+- 모듈 전체를 대상으로 컴포넌트 스캔 범위를 임의로 넓히거나 중복 Bean 등록을 추가하지 않는다.
+- 영속성 Adapter는 기존 `@PersistenceAdapter` 방식을 따른다.
+- application과 infrastructure는 라이브러리 모듈로 유지한다. 실행용 `bootJar`를 활성화하지 않는다.
 
-# 특정 모듈 검증
-./gradlew :backend-api:test
-./gradlew :backend-api:build
-./gradlew :backend-infrastructure:build
+## 도메인과 API 변경
 
-# 단일 테스트 클래스 또는 메서드
-./gradlew :backend-api:test --tests 'io.joyoungc.api.product.ProductControllerTest'
-./gradlew :backend-api:test --tests '...Class.method'
+- `Member`, `Order`, `Product`의 기존 값 객체와 정책을 재사용한다.
+- `ResponseCode`, `CommonError`, `CommonResponse`를 사용하여 기존 응답 형식을 유지한다.
+- 예외 처리는 `GlobalExceptionHandler`에 맞춘다.
+  유효성 검증 오류는 400, NOT_FOUND 애플리케이션 오류는 404, 그 외 애플리케이션 오류는 500이다.
+- DTO / Entity 변환에는 기존 MapStruct 및 Lombok 바인딩 구성을 사용한다.
+- 한국어·영어·일본어 메시지 구조와 기존 검증·오류 메시지 키를 유지한다.
 
-# 정리 및 실행 가능한 JAR 생성
-./gradlew clean
-./gradlew :<module>:bootJar
+## 코드 생성과 의존성
 
-# 애플리케이션 실행
-./gradlew :backend-api:bootRun
-./gradlew :backend-batch:bootRun
-```
+- 테이블 정의 또는 생성된 테이블에 의존하는 코드를 변경하면 먼저 다음을 실행한다.
 
-## 데이터베이스 및 코드 생성
+  ```shell
+  ./gradlew :backend-infrastructure:generateJooq
+  ```
 
-```bash
-# 로컬 MySQL 시작
-docker compose -f docker/mysql/docker-compose.yml up -d
+- jOOQ와 QueryDSL 생성물을 직접 수정하거나 커밋하지 않는다.
+- Spring Boot가 관리하는 라이브러리에 버전을 임의로 고정하지 않는다.
+  버전 재정의가 필요하면 호환성을 확인하고 이유를 설명한다.
 
-# jOOQ 코드 생성
-./gradlew :backend-infrastructure:generateJooq
-```
+## 검증
 
-| 항목 | 값 |
-| --- | --- |
-| MySQL 포트 | `3306` |
-| 데이터베이스 | `app-db` |
-| 사용자 / 비밀번호 | `user` / `user` |
-| jOOQ 입력 | `backend-infrastructure/src/main/resources/sql/schema.sql` |
-| jOOQ 출력 | `backend-infrastructure/build/generated/jooq/main` (무시되는 생성물) |
-
-테이블을 변경하거나 테이블에 의존하는 코드를 수정할 때는 `generateJooq`를 먼저 실행한다.
-
-## 모듈 구조
-
-```text
-backend-domain          순수 도메인 모델, 프로젝트 의존성 없음
-    |
-    +-- backend-application       domain 의존
-    |
-    +-- backend-infrastructure    domain, application 의존
-    |
-    +-- backend-api               domain, application, infrastructure 의존
-    |
-    +-- backend-batch             domain, application, infrastructure 의존
-```
-
-이 프로젝트는 DDD와 헥사고날 아키텍처(Ports and Adapters)를 사용한다.
-
-| 역할 | 위치 |
-| --- | --- |
-| Domain business rule | `backend-domain` |
-| Input port / Use case | `backend-application/src/main/java/io/joyoungc/application/input` |
-| Output port / Repository interface | `backend-application/src/main/java/io/joyoungc/application/output` |
-| Primary/Input adapter, Controller | `backend-api/src/main/java/io/joyoungc/api` |
-| Secondary/Output adapter, Persistence | `backend-infrastructure/src/main/java/io/joyoungc/infrastructure/persistence` |
-
-`backend-domain`은 Spring 의존성과 애노테이션이 없는 순수 POJO 계층으로 유지한다.
-
-## 애플리케이션 wiring
-
-```text
-ServerApiApplication
-ServerBatchApplication
-        |
-        +-- @Import ApplicationConfig
-        |       +-- scans io.joyoungc.application.input
-        |
-        +-- @Import PersistenceConfig
-                +-- scans io.joyoungc.infrastructure.persistence
-```
-
-- API 진입점: `io.joyoungc.api.ServerApiApplication`
-- Batch 진입점: `io.joyoungc.batch.ServerBatchApplication`
-- 모듈 전체를 대상으로 한 광범위한 컴포넌트 스캔을 가정하지 않는다.
-- UseCase 구현에 `@Service`를 임의로 추가하지 말고 현재 input 패키지 스캔 방식을 따른다.
-- `@PersistenceAdapter`는 영속성 계층 컴포넌트에 사용하는 사용자 정의 Spring stereotype이다.
-
-## 도메인 및 API 규칙
-
-- 핵심 도메인 객체: `Member`, `Order`, `Product`
-- 주요 값 객체/정책: `Address`, `Grade`, `OrderStatus`, `DiscountPolicy`
-- 구조화된 오류 처리: `ResponseCode`, `CommonError`
-- 전역 예외 처리: `GlobalExceptionHandler`의 `@RestControllerAdvice`
-- 표준 응답: 오류 코드가 포함된 `CommonResponse`
-- HTTP 매핑: `NOT_FOUND`는 404, 그 외 애플리케이션 예외는 500
-- DTO/Entity 변환: 기존 MapStruct 및 Lombok 바인딩 구성 사용
-- 메시지: 한국어, 영어, 일본어 다국어 구조와 기존 검증/오류 메시지 키 유지
-
-## 테스트
-
-| 대상 | 실행/도구 | 주의사항 |
-| --- | --- | --- |
-| API 통합 테스트 | `BaseServerApiIntegrationTest`, JUnit 5, REST Assured | 랜덤 포트, `test` 프로파일, Mongo 자동 설정 제외 |
-| API 외부 연동 | WireMock, Instancio | infrastructure의 공유 test fixture 사용 |
-| Infrastructure DB | Testcontainers MySQL | Docker 필요, `application-testcontainers.yml` 사용 |
-| Infrastructure 외부 연동 | Testcontainers, WireMock | 프로파일을 Gradle 시스템 프로퍼티로 전달 가능 |
-
-API 테스트의 `test` 프로파일은 `infra-develop`을 그룹으로 포함한다. Infrastructure 테스트에서 프로파일을 지정하려면 다음을 사용한다.
-
-```bash
-./gradlew :backend-infrastructure:test -Dspring.profiles.active=<profile>
-```
-
-Infrastructure의 `testFixtures` 코드를 변경하면 API 모듈의 테스트 컴파일에도 영향을 줄 수 있다.
+- 코드 변경 후 영향을 받는 모듈의 테스트를 실행한다.
+- 의존성, 빌드 설정, 여러 모듈에 걸친 변경은 `./gradlew build`로 전체 검증한다.
+- infrastructure의 `testFixtures`를 변경하면 API 모듈의 테스트도 검증한다.
+- 외부 HTTP 연동의 일반 테스트는 WireMock을 사용하고 실제 공개 API의 가용성에 의존하지 않도록 한다.
+- Docker 및 별도 서비스가 필요한 테스트는 README.md의 환경 조건을 확인한다.
+- 실패한 테스트를 통과시키기 위해 검증을 삭제하거나 비활성화하지 않는다.
+- 실행하지 못했거나 건너뛴 테스트와 그 이유를 결과에 명시한다.

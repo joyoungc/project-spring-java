@@ -31,7 +31,7 @@ dependencies {
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 
-    implementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
+    implementation("org.apache.httpcomponents.client5:httpclient5")
 
     // querydsl
     implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
@@ -158,4 +158,12 @@ jooq {
 
 test {
     systemProperty 'spring.profiles.active', System.getProperty('spring.profiles.active')
+}
+// Library modules do not have an executable application entry point.
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
